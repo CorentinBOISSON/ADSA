@@ -1,10 +1,18 @@
 package battleship;
 
+import java.util.List;
+
 public class Vaisseau{
 
     private List<Position> longueur;
     private boolean isSink;
     private int shoot;
+
+    public Vaisseau(List<Position> longueur, boolean isSink, int shoot) {
+        this.longueur = longueur;
+        this.isSink = isSink;
+        this.shoot = shoot;
+    }
 
     public boolean isSink() {
         return isSink;

@@ -7,6 +7,13 @@ public class Position{
     private boolean isOccupied;
     private boolean isHit;
 
+    public Position(int row, int column, boolean isOccupied, boolean isHit) {
+        this.row = row;
+        this.column = column;
+        this.isOccupied = isOccupied;
+        this.isHit = isHit;
+    }
+
     public int getRow() {
         return row;
     }

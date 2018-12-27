@@ -1,5 +1,7 @@
 package battleship;
 
+import java.util.Scanner;
+
 public class Jeu{
 
     private int nbTour;
@@ -8,6 +10,13 @@ public class Jeu{
     private int nbSink;
     private String player;
 
+    public Jeu(int nbTour, int nbShip, int nbShot, int nbSink, String player) {
+        this.nbTour = nbTour;
+        this.nbShip = nbShip;
+        this.nbShot = nbShot;
+        this.nbSink = nbSink;
+        this.player = player;
+    }
 
     public int getNbTour() {
         return nbTour;
@@ -44,7 +53,7 @@ public class Jeu{
 
     public void CommencerPartie(String joueur1, String joueur2)
     {
-        System.out.println("****** Welcome to BattleShip Royal ****** \n Please enter your name :");
+        System.out.println("****** Welcome to BattleShip Royale ****** \n Please enter your name :");
         Scanner s = new Scanner(System.in);
         String player = s.nextLine();
 

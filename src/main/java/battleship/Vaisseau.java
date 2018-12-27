@@ -4,14 +4,34 @@ import java.util.List;
 
 public class Vaisseau{
 
-    private List<Position> longueur;
+    private List<Position> emplacement;
+    private int longueur;
+    private Type Type;
     private boolean isSink;
     private int shoot;
 
-    public Vaisseau(List<Position> longueur, boolean isSink, int shoot) {
+    public List<Position> getEmplacement() {
+        return emplacement;
+    }
+
+    public void setEmplacement(List<Position> emplacement) {
+        this.emplacement = emplacement;
+    }
+
+    public int getLongueur() {
+        return longueur;
+    }
+
+    public void setLongueur(int longueur) {
         this.longueur = longueur;
-        this.isSink = isSink;
-        this.shoot = shoot;
+    }
+
+    public battleship.Type getType() {
+        return Type;
+    }
+
+    public void setType(battleship.Type type) {
+        Type = type;
     }
 
     public boolean isSink() {
@@ -30,10 +50,12 @@ public class Vaisseau{
         this.shoot = shoot;
     }
 
-    @java.lang.Override
-    public java.lang.String toString() {
+    @Override
+    public String toString() {
         return "Vaisseau{" +
-                "longueur=" + longueur +
+                "emplacement=" + emplacement +
+                ", longueur=" + longueur +
+                ", Type=" + Type +
                 ", isSink=" + isSink +
                 ", shoot=" + shoot +
                 '}';

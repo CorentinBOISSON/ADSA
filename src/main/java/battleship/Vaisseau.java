@@ -10,6 +10,14 @@ public class Vaisseau{
     private boolean isSink;
     private int shoot;
 
+    public Vaisseau(List<Position> emplacement, int longueur, battleship.Type type, boolean isSink, int shoot) {
+        this.emplacement = emplacement;
+        this.longueur = longueur;
+        Type = type;
+        this.isSink = isSink;
+        this.shoot = shoot;
+    }
+
     public List<Position> getEmplacement() {
         return emplacement;
     }

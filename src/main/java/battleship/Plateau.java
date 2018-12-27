@@ -1,20 +1,21 @@
 package battleship;
 
 import java.util.List;
+import java.util.ArrayList;
 
 public class Plateau {
 
-    private List<Position> slot;
+    private List< ArrayList<Position> > Plateau;
 
-    public Plateau(List<Position> slot) {
-        this.slot = slot;
+    public Plateau(List<ArrayList<Position>> plateau) {
+        Plateau = plateau;
     }
 
-    public List<Position> getSlot() {
-        return slot;
+    public List<ArrayList<Position>> getPlateau() {
+        return Plateau;
     }
 
-    public void setSlot(List<Position> slot) {
-        this.slot = slot;
+    public void setPlateau(List<ArrayList<Position>> plateau) {
+        Plateau = plateau;
     }
 }

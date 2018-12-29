@@ -80,27 +80,11 @@ public class Main {
             }
         }
 
-    public void Jeu(){
+    public void Jeu(int hauteur, int largeur){
 
 
-        Position[][] plateau = new Position[10][10];
+        Position[][] plateau = new Position[hauteur][largeur];
 
-
-        for (int i=0;i<9;i++){
-            for(int j=0;j<=9;j++)
-            {
-                plateau[i][j].bateau_joueur_1=false;
-                plateau[i][j].bateau_joueur_2=false;
-                plateau[i][j].tire_joueur1=false;
-                plateau[i][j].tire_joueur2=false;
-                plateau[i][j].bateau_joueur_1_touche=false;
-                plateau[i][j].bateau_joueur_2_touche=false;
-                plateau[i][j].bateau_joueur_1_coule=false;
-                plateau[i][j].bateau_joueur_2_coule=false;
-                plateau[i][j].id_bateau_joueur_1=0;
-                plateau[i][j].id_bateau_joueur_2=0;
-            }
-        }
 
 
     }

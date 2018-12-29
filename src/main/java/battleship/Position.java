@@ -14,16 +14,16 @@ public class Position {
     public int id_bateau_joueur_2; // 0si pas de bateau
 
     public Position(boolean bateau_joueur_1, boolean bateau_joueur_2, boolean tire_joueur1, boolean tire_joueur2, boolean bateau_joueur_1_touche, boolean bateau_joueur_2_touche, boolean bateau_joueur_1_coule, boolean bateau_joueur_2_coule, int id_bateau_joueur_1, int id_bateau_joueur_2) {
-        this.bateau_joueur_1 = bateau_joueur_1;
-        this.bateau_joueur_2 = bateau_joueur_2;
-        this.tire_joueur1 = tire_joueur1;
-        this.tire_joueur2 = tire_joueur2;
-        this.bateau_joueur_1_touche = bateau_joueur_1_touche;
-        this.bateau_joueur_2_touche = bateau_joueur_2_touche;
-        this.bateau_joueur_1_coule = bateau_joueur_1_coule;
-        this.bateau_joueur_2_coule = bateau_joueur_2_coule;
-        this.id_bateau_joueur_1 = id_bateau_joueur_1;
-        this.id_bateau_joueur_2 = id_bateau_joueur_2;
+        this.bateau_joueur_1 = false;
+        this.bateau_joueur_2 = false;
+        this.tire_joueur1 = false;
+        this.tire_joueur2 = false;
+        this.bateau_joueur_1_touche = false;
+        this.bateau_joueur_2_touche = false;
+        this.bateau_joueur_1_coule = false;
+        this.bateau_joueur_2_coule = false;
+        this.id_bateau_joueur_1 = 0;
+        this.id_bateau_joueur_2 = 0;
     }
 
     public boolean isBateau_joueur_1() {

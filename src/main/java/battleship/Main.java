@@ -104,7 +104,7 @@ public class Main {
 
         System.out.print("Hello world");
         System.out.println("\n");
-        Plateau p = new Plateau(4,4);
+        Plateau p = new Plateau(10,6);
         p.displayBoard();
 
 

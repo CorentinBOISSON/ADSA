@@ -100,7 +100,6 @@ public class Main {
     public static void main(String[] args) {
 
         System.out.print("Hello world");
-        System.out.println("\n");
         Plateau p = new Plateau(10,10);
         p.displayBoard();
 

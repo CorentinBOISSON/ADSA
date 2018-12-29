@@ -88,7 +88,7 @@ public class Main {
                     {
                         for (int i =coordonnees[0];i<=coordonnees[0]+taille; i++ )
                         {
-                            plateau[i][coordonnees[0]]=1;
+                            plateau[i][coordonnees[1]]=1;
                             effectue=true;
                         }
 

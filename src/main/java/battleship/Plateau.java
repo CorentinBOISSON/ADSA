@@ -1,21 +1,59 @@
 package battleship;
 
-import java.util.List;
-import java.util.ArrayList;
-
 public class Plateau {
 
-    private List< ArrayList<Position> > Plateau;
+    private int width;
+    private int height;
+    private int[][] board;
 
-    public Plateau(List<ArrayList<Position>> plateau) {
-        Plateau = plateau;
+    public Plateau(int width, int height, int[][] board) {
+        this.width = width;
+        this.height = height;
+        this.board = board;
     }
 
-    public List<ArrayList<Position>> getPlateau() {
-        return Plateau;
+    public Plateau(int[][] board) {
+        this.board = board;
     }
 
-    public void setPlateau(List<ArrayList<Position>> plateau) {
-        Plateau = plateau;
+    public Plateau(int width, int height) {
+        this.width = width;
+        this.height = height;
+        this.board = new int[width][height];
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public int[][] getBoard() {
+        return board;
+    }
+
+    public void setBoard(int[][] board) {
+        this.board = board;
+    }
+
+    public void displayBoard(){
+        for (int i = 0; i < height; i++){
+            System.out.println();
+            for (int j = 0; j < width; j++){
+                System.out.print(0);
+                System.out.print(" ");
+                board[i][j] = 0;
+            }
+        }
     }
 }

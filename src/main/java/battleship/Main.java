@@ -1,8 +1,5 @@
 package battleship;
 
-import java.util.List;
-
-
 public class Main {
 
     public int[] coordonnees(char colonne, int ligne)
@@ -105,9 +102,10 @@ public class Main {
 
     public static void main(String[] args) {
 
-        System.out.print("Hello ");
-        System.out.println("world");
-
+        System.out.print("Hello world");
+        System.out.println("\n");
+        Plateau p = new Plateau(4,4);
+        p.displayBoard();
 
 
     }

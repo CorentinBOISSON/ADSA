@@ -22,10 +22,7 @@ public class Main {
         }
 
 
-
-        int Coordonnees[]  = {Ligne,Colonne};
-
-        return(Coordonnees);
+        return(new int[]{Ligne, Colonne});
 
     }
 
@@ -39,7 +36,7 @@ public class Main {
         if (coordonnees[0]>=0 && coordonnees[0]<=hauteur && coordonnees[1]>=0 && coordonnees[1]<=largeur) {
 
 
-            if (horizontal == true) {
+            if (horizontal) {
 
                 if (coordonnees[1]+taille <= largeur)
                 {
@@ -53,7 +50,7 @@ public class Main {
                         }
                     }
 
-                    if (place==true)
+                    if (place)
                     {
                         for (int i =coordonnees[1];i<=coordonnees[1]+taille; i++ )
                         {
@@ -81,7 +78,7 @@ public class Main {
                         }
                     }
 
-                    if (place==true)
+                    if (place)
                     {
                         for (int i =coordonnees[0];i<=coordonnees[0]+taille; i++ )
                         {
@@ -104,7 +101,7 @@ public class Main {
 
         System.out.print("Hello world");
         System.out.println("\n");
-        Plateau p = new Plateau(10,6);
+        Plateau p = new Plateau(10,10);
         p.displayBoard();
 
 

@@ -66,15 +66,12 @@ public class Player {
     }
 
 
-    public int[][] CreerPlateau()
+    public void CommencerPartie(String joueur1, String joueur2)
     {
-        int grille [][] = new int[10][10];
-        for (int i=0; i< grille.length; i++) {
-            for (int j=0; j<grille[0].length; j++){
-                grille[i][j] = 0;
-            }
-        }
-        return grille;
+        System.out.println("****** Welcome to BattleShip Royale ****** \n Please enter your name :");
+        Scanner s = new Scanner(System.in);
+        String player = s.nextLine();
+
     }
 
 }

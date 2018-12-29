@@ -13,7 +13,7 @@ public class Main {
             if (code >=97 && code <=107){
                 Colonne=code-97;}
             }
-        }
+
         return(new int[]{Ligne, Colonne});
     }
 
@@ -22,10 +22,11 @@ public class Main {
         int hauteur = plateau.length;
         int largeur = plateau[0].length;
         boolean effectue =false;
+        boolean place =true;
         if (coordonnees[0]>=0 && coordonnees[0]<=hauteur && coordonnees[1]>=0 && coordonnees[1]<=largeur) {
             if (horizontal) {
                 if (coordonnees[1]+taille <= largeur){
-                    boolean place =true;
+
                     for (int i =coordonnees[1];i<=coordonnees[1]+taille; i++ ){
                         if (plateau[coordonnees[0]][i]==1){
                             place=false;}
@@ -41,7 +42,7 @@ public class Main {
             }
             else {
                 if (coordonnees[0]+taille <= hauteur){
-                    boolean place =true;
+
                     for (int i =coordonnees[0];i<=coordonnees[0]+taille; i++ ){
                         if (plateau[i][coordonnees[1]]==1){
                             place=false;
@@ -55,7 +56,7 @@ public class Main {
                     }
                 }
             }
-        }
+
         return(effectue);
     }
 
@@ -79,6 +80,30 @@ public class Main {
             }
         }
 
+    public void Jeu(){
+
+
+        Position[][] plateau = new Position[10][10];
+
+
+        for (int i=0;i<9;i++){
+            for(int j=0;j<=9;j++)
+            {
+                plateau[i][j].bateau_joueur_1=false;
+                plateau[i][j].bateau_joueur_2=false;
+                plateau[i][j].tire_joueur1=false;
+                plateau[i][j].tire_joueur2=false;
+                plateau[i][j].bateau_joueur_1_touche=false;
+                plateau[i][j].bateau_joueur_2_touche=false;
+                plateau[i][j].bateau_joueur_1_coule=false;
+                plateau[i][j].bateau_joueur_2_coule=false;
+                plateau[i][j].id_bateau_joueur_1=0;
+                plateau[i][j].id_bateau_joueur_2=0;
+            }
+        }
+
+
+    }
 
     public static void main(String[] args) {
 

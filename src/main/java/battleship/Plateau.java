@@ -52,7 +52,7 @@ public class Plateau {
             for (int j = 0; j < width; j++){
                 System.out.print(0);
                 System.out.print(" ");
-                board[j][i] = 0;
+                // board[j][i] = 0;
             }
         }
     }

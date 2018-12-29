@@ -6,29 +6,25 @@ import java.util.Scanner;
 public class Player {
 
     private String player;
-    private List<Vaisseau> Ships;
+    private List<Navire> Ships;
     private int nbTour;
     private int nbShip;
-    private int nbShot;
-    private int nbSink;
 
 
-    public Player(String player, List<Vaisseau> Ships, int nbTour, int nbShip, int nbShot, int nbSink) {
+
+    public Player(String player, List<Navire> Ships, int nbTour, int nbShip) {
         this.Ships=Ships;
         this.player = player;
         this.nbTour = nbTour;
         this.nbShip = nbShip;
-        this.nbShot = nbShot;
-        this.nbSink = nbSink;
-
     }
 
 
-    public List<Vaisseau> getShips() {
+    public List<Navire> getShips() {
         return Ships;
     }
 
-    public void setShips(List<Vaisseau> Ships) {
+    public void setShips(List<Navire> Ships) {
         this.Ships = Ships;
     }
 
@@ -49,24 +45,7 @@ public class Player {
         this.nbShip = nbShip;
     }
 
-    public int getNbShot() {
-        return nbShot;
-    }
-
-    public void setNbShot(int nbShot) {
-        this.nbShot = nbShot;
-    }
-
-    public int getNbSink() {
-        return nbSink;
-    }
-
-    public void setNbSink(int nbSink) {
-        this.nbSink = nbSink;
-    }
-
-
-    public void CommencerPartie(String joueur1, String joueur2)
+    public void CommencerPartie()
     {
         System.out.println("****** Welcome to BattleShip Royale ****** \n Please enter your name :");
         Scanner s = new Scanner(System.in);

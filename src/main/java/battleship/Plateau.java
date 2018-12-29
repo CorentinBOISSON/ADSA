@@ -4,22 +4,22 @@ public class Plateau {
 
     private int width;
     private int height;
-    private int[][] board;
+    private Position[][] board;
 
-    public Plateau(int width, int height, int[][] board) {
+    public Plateau(int width, int height, Position[][] board) {
         this.width = width;
         this.height = height;
         this.board = board;
     }
 
-    public Plateau(int[][] board) {
+    public Plateau(Position[][] board) {
         this.board = board;
     }
 
     public Plateau(int width, int height) {
         this.width = width;
         this.height = height;
-        this.board = new int[width][height];
+        this.board = new Position[width][height];
     }
 
     public int getWidth() {
@@ -38,11 +38,11 @@ public class Plateau {
         this.height = height;
     }
 
-    public int[][] getBoard() {
+    public Position[][] getBoard() {
         return board;
     }
 
-    public void setBoard(int[][] board) {
+    public void setBoard(Position[][] board) {
         this.board = board;
     }
 
@@ -55,6 +55,19 @@ public class Plateau {
                 board[j][i] = 0;
             }
         }
+    }
+
+
+    public void isSinked (int [][] grilleBateau, int [] coordonnee){
+        //balayage ligne
+        for (int j=coordonnee[1]; j< width; j++){
+            if (grilleBateau[coordonnee[0]][j] == 1){
+
+            }
+        }
+
+
+
     }
 
 

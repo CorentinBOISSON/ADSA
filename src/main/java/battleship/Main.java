@@ -26,10 +26,80 @@ public class Main {
 
 
 
-        int Coordonnees[]  = {Colonne,Ligne};
+        int Coordonnees[]  = {Ligne,Colonne};
 
         return(Coordonnees);
 
+    }
+
+
+    public boolean placer_bateau (int[][]plateau, int taille, int[]coordonnees, boolean horizontal)
+    {
+        int hauteur = plateau.length;
+        int largeur = plateau[0].length;
+        boolean effectue =false;
+
+        if (coordonnees[0]>=0 && coordonnees[0]<=hauteur && coordonnees[1]>=0 && coordonnees[1]<=largeur) {
+
+
+            if (horizontal == true) {
+
+                if (coordonnees[1]+taille <= largeur)
+                {
+                    boolean place =true;
+
+                    for (int i =coordonnees[1];i<=coordonnees[1]+taille; i++ )
+                    {
+                        if (plateau[coordonnees[0]][i]==1)
+                        {
+                            place=false;
+                        }
+                    }
+
+                    if (place==true)
+                    {
+                        for (int i =coordonnees[1];i<=coordonnees[1]+taille; i++ )
+                        {
+                            plateau[coordonnees[0]][i]=1;
+                            effectue=true;
+                        }
+
+                    }
+
+                }
+
+            }
+
+            else {
+
+                if (coordonnees[0]+taille <= hauteur)
+                {
+                    boolean place =true;
+
+                    for (int i =coordonnees[0];i<=coordonnees[0]+taille; i++ )
+                    {
+                        if (plateau[i][coordonnees[1]]==1)
+                        {
+                            place=false;
+                        }
+                    }
+
+                    if (place==true)
+                    {
+                        for (int i =coordonnees[0];i<=coordonnees[0]+taille; i++ )
+                        {
+                            plateau[i][coordonnees[0]]=1;
+                            effectue=true;
+                        }
+
+                    }
+
+                }
+
+            }
+
+        }
+        return(effectue);
     }
 
 

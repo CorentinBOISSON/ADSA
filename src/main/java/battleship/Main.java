@@ -230,30 +230,33 @@ public class Main {
             placement=placer_bateau_J1(plateau,taille,coordonnees,horizontal,id);
         }
         int[][]positions=new int[taille][2];
-        if (horizontal==true){
-            for (int i=0; i<taille;i++){
-                positions[i][0]=coordonnees[0];
-                positions[i][1]=coordonnees[1]+i;
-            }
-        }
-        else{
-            for (int i=0; i<taille;i++){
-                positions[i][0]=coordonnees[0]+i;
-                positions[i][1]=coordonnees[1];
-            }
-        }
+        positions = TestHorizontal(horizontal,coordonnees,taille);
+
         Bateau bateau = new Bateau(name_joueur,id,taille,positions,false);
         return(bateau);
     }
 
+    public static int [][] TestHorizontal(boolean horizontal, int [] coordonnees, int taille) {
+        int[][] positions = new int[taille][2];
+        if (horizontal == true) {
+            for (int i = 0; i < taille; i++) {
+                positions[i][0] = coordonnees[0];
+                positions[i][1] = coordonnees[1] + i;
+            }
+        } else {
+            for (int i = 0; i < taille; i++) {
+                positions[i][0] = coordonnees[0] + i;
+                positions[i][1] = coordonnees[1];
+            }
+        }
+        return positions;
+    }
+
     public static Bateau placement2(Position[][]plateau, int taille, int id,String name_joueur){
-
-
         int [] coordonnees =new int[2];
         boolean placement=false;
         int ligne=0;
         int colonne=0;
-
         int test= (int)(Math.random());
         boolean  horizontal= test>=0.5;
 
@@ -278,18 +281,8 @@ public class Main {
 
         }
         int[][]positions=new int[taille][2];
-        if (horizontal==true){
-            for (int i=0; i<taille;i++){
-                positions[i][0]=coordonnees[0];
-                positions[i][1]=coordonnees[1]+i;
-            }
-        }
-        else{
-            for (int i=0; i<taille;i++){
-                positions[i][0]=coordonnees[0]+i;
-                positions[i][1]=coordonnees[1];
-            }
-        }
+        positions = TestHorizontal(horizontal,coordonnees,taille);
+
         Bateau bateau = new Bateau(name_joueur,id,taille,positions,false);
         return(bateau);
     }

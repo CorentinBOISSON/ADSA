@@ -10,8 +10,8 @@ public class Main {
         int Ligne=-1;
         int Colonne=colonne-1;
         int code = Character.getNumericValue(ligne);
-        if (code >=65 && code <=75){
-            Ligne=code-65;}
+        if (code >=10 && code <=35){
+            Ligne=code-10;}
         else{
             if (code >=97 && code <=107){
                 Ligne=code-97;}
@@ -77,7 +77,7 @@ public class Main {
                     }
                 }
                 if (place){
-                    for (int i =coordonnees[1];i<=coordonnees[1]+taille; i++ ){
+                    for (int i =coordonnees[1];i<coordonnees[1]+taille; i++ ){
                         plateau[coordonnees[0]][i].bateau_joueur_1 = true; //verif
                         plateau[coordonnees[0]][i].id_bateau_joueur_1 = id; //verif
                         effectue=true;
@@ -89,12 +89,12 @@ public class Main {
             if (coordonnees[0]+taille <= hauteur){
 
                 for (int i =coordonnees[0];i<=coordonnees[0]+taille; i++ ){
-                    if (plateau[i][coordonnees[1]].bateau_joueur_1 == true){
+                    if ((plateau[i][coordonnees[1]]).bateau_joueur_1){
                         place=false;
                     }
                 }
                 if (place){
-                    for (int i =coordonnees[0];i<=coordonnees[0]+taille; i++ ){
+                    for (int i =coordonnees[0];i<coordonnees[0]+taille; i++ ){
                         plateau[i][coordonnees[1]].bateau_joueur_1 = true; //verif;
                         plateau[i][coordonnees[1]].id_bateau_joueur_1 = id; //verif
                         effectue=true;
@@ -110,7 +110,7 @@ public class Main {
             System.out.println();
             for (int j=0; j<plateau[0].length; j++){
                 Position p = plateau[i][j];
-                if(p.getId_bateau_joueur_1() == 0 && p.tire_joueur_2 == false){
+                if(p.id_bateau_joueur_1 == 0 && p.tire_joueur_2 == false){
                     System.out.print(0);
                 }
                 else if (p.getId_bateau_joueur_1() == 0 && p.tire_joueur_2 == true){
@@ -151,21 +151,24 @@ public class Main {
         boolean horizontal = true;
         int [] coordonnees =new int[2];
 
-        Scanner sc = new Scanner(System.in);
+
         boolean placement=false;
 
         while (placement==false){
 
             System.out.println("Veuillez saisir la ligne (lettre) de l'emplacement de votre bateau de taille "+ taille);
+            Scanner sc = new Scanner(System.in);
             String str = sc.nextLine();
             ligne = str.charAt(0);
 
             System.out.println("Veuillez saisir la colonne (chiffre) de l'emplacement de votre bateau de taille "+ taille);
-            colonne = sc.nextInt();
+            Scanner sc2 = new Scanner(System.in);
+            colonne = sc2.nextInt();
 
             System.out.println("Voulez-vous placer votre bateau à l'horizontale (H) ou à la verticale (V) ?");
-            String Str = sc.nextLine();
-            reponse = Str.charAt(0);
+            Scanner sc3 = new Scanner(System.in);
+            String str2 = sc3.nextLine();
+            reponse = str2.charAt(0);
 
             if (reponse=='V')
             {
@@ -204,6 +207,13 @@ public class Main {
 
 
         Position[][] plateau = new Position[hauteur][largeur];
+
+        for (int i=0;i<hauteur;i++)
+        {
+            for (int j=0;j<largeur;j++){
+                plateau[i][j]=new Position(false,false,false,false,false,false,false,false,0,0);
+            }
+        }
 
         System.out.println("Veuillez saisir votre nom");
         Scanner sc = new Scanner(System.in);

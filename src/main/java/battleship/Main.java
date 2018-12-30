@@ -102,7 +102,6 @@ public class Main {
         return(effectue);
     }
 
-
     public static boolean placer_bateau_J1 (Position[][]plateau, int taille, int[]coordonnees, boolean horizontal, int id){
         int hauteur = plateau.length;
         int largeur = plateau[0].length;
@@ -192,8 +191,6 @@ public class Main {
         }
         System.out.println();
     } //a verifier que j'eusse fait tous les cas
-
-
 
     public static void AfficherPlateauAttaqueJ1 (Position[][] plateau) {
         for (int i = 0; i < plateau.length; i++) {
@@ -297,7 +294,6 @@ public class Main {
         return(bateau);
     }
 
-
     public static int[] EntrerCoordonnes() {
         int Ligne=-1;
         int[] coordonnees = new int[2];
@@ -332,7 +328,7 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         String name1 = sc.nextLine();
         List<Bateau> bateaux1 = new ArrayList<Bateau>();
-        for (int i=2;i<=2;i++ ){
+        for (int i=2;i<=6;i++ ){
             AfficherPlateauJ1(plateau);
             System.out.println();
             bateaux1.add(placement(plateau,i,i+98,name1));
@@ -340,6 +336,13 @@ public class Main {
         AfficherPlateauJ1(plateau);
         System.out.println();
         Player J1=new Player(name1,bateaux1,0,5);
+
+        List<Bateau> bateaux2 = new ArrayList<Bateau>();
+        for (int i=2;i<=6;i++ ){
+            bateaux2.add(placement2(plateau,i,i+198,name1));
+        }
+        Player J2=new Player("Ordinateur",bateaux2,0,5);
+
 
         //test fonction tirer
         plateau[0][0].bateau_joueur_2 = true;
@@ -355,7 +358,6 @@ public class Main {
 
         //fonction estCoulee penser a modif attribut nbBato et List<Bato> du joueur
     }
-
 
     public static int readInt(Scanner scanner, String prompt, String promptOnError) {
 

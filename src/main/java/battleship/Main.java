@@ -1,64 +1,25 @@
 package battleship;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Main {
 
-    public int[] coordonnees(char colonne, int ligne)
+    public int[] coordonnees(char ligne,int colonne)
     {
-        int Ligne=ligne-1;
-        int Colonne=-1;
-        int code = Character.getNumericValue(colonne);
+        int Ligne=-1;
+        int Colonne=colonne-1;
+        int code = Character.getNumericValue(ligne);
         if (code >=65 && code <=75){
-            Colonne=code-65;}
+            Ligne=code-65;}
         else{
             if (code >=97 && code <=107){
-                Colonne=code-97;}
+                Ligne=code-97;}
             }
 
         return(new int[]{Ligne, Colonne});
     }
 
-
-    public boolean placer_bateau (int[][]plateau, int taille, int[]coordonnees, boolean horizontal){
-        int hauteur = plateau.length;
-        int largeur = plateau[0].length;
-        boolean effectue =false;
-        boolean place =true;
-        if (coordonnees[0]>=0 && coordonnees[0]<=hauteur && coordonnees[1]>=0 && coordonnees[1]<=largeur) {
-            if (horizontal) {
-                if (coordonnees[1]+taille <= largeur){
-
-                    for (int i =coordonnees[1];i<=coordonnees[1]+taille; i++ ){
-                        if (plateau[coordonnees[0]][i]==1){
-                            place=false;}
-                        }
-                    }
-                    if (place){
-                        for (int i =coordonnees[1];i<=coordonnees[1]+taille; i++ ){
-                            plateau[coordonnees[0]][i]=1;
-                            effectue=true;
-                        }
-                    }
-                }
-            }
-            else {
-                if (coordonnees[0]+taille <= hauteur){
-
-                    for (int i =coordonnees[0];i<=coordonnees[0]+taille; i++ ){
-                        if (plateau[i][coordonnees[1]]==1){
-                            place=false;
-                        }
-                    }
-                    if (place){
-                        for (int i =coordonnees[0];i<=coordonnees[0]+taille; i++ ){
-                            plateau[i][coordonnees[1]]=1;
-                            effectue=true;
-                        }
-                    }
-                }
-            }
-
-        return(effectue);
-    }
 
     public void TirJ1 (Position [][] plateau, Player J1, int[] coordonnees){
         //il va falloir faire 2 fonctions tir pour les deux joueurs..
@@ -181,11 +142,82 @@ public class Main {
         }
     } //a verifier que j'ai fait tous les cas
 
+    public Bateau placement(Position[][]plateau, int taille, int id,String name_joueur){
+
+        String name1;
+        int colonne;
+        char ligne;
+        char reponse;
+        boolean horizontal = true;
+        int [] coordonnees =new int[2];
+
+        Scanner sc = new Scanner(System.in);
+        boolean placement=false;
+
+        while (placement==false){
+
+            System.out.println("Veuillez saisir la ligne (lettre) de l'emplacement de votre bateau de taille "+ taille);
+            String str = sc.nextLine();
+            ligne = str.charAt(0);
+
+            System.out.println("Veuillez saisir la colonne (chiffre) de l'emplacement de votre bateau de taille "+ taille);
+            colonne = sc.nextInt();
+
+            System.out.println("Voulez-vous placer votre bateau à l'Horizontale (H) ou à la verticale (V) ?");
+            String Str = sc.nextLine();
+            reponse = Str.charAt(0);
+
+            if (reponse=='V')
+            {
+                horizontal=false;
+            }
+
+            coordonnees=coordonnees(ligne, colonne);
+
+            placement=placer_bateau_J1(plateau,taille,coordonnees,horizontal,id);
+
+        }
+
+        int[][]positions=new int[taille][2];
+        if (horizontal==true){
+            for (int i=0; i<taille;i++){
+                positions[i][0]=coordonnees[0];
+                positions[i][1]=coordonnees[1]+i;
+            }
+        }
+
+        else{
+            for (int i=0; i<taille;i++){
+                positions[i][0]=coordonnees[0]+i;
+                positions[i][1]=coordonnees[1];
+            }
+
+        }
+        Bateau bateau = new Bateau(name_joueur,id,taille,positions,false);
+
+
+        return(bateau);
+    }
+
+
     public void Jeu(int hauteur, int largeur){
 
 
         Position[][] plateau = new Position[hauteur][largeur];
 
+        System.out.println("Veuillez saisir votre nom");
+        Scanner sc = new Scanner(System.in);
+        String name1 = sc.nextLine();
+
+        List<Bateau> bateaux1 = new ArrayList<Bateau>();
+
+        Bateau bateau;
+        for (int i=2;i<=6;i++ ){
+
+            bateaux1.add(placement(plateau,i,i-1,name1));
+        }
+
+        Player J1=new Player(name1,bateaux1,0,0);
 
 
     }

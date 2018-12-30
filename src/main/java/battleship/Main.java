@@ -192,6 +192,8 @@ public class Main {
         System.out.println();
     } //a verifier que j'eusse fait tous les cas
 
+    //qsdfghjkl
+
     public static void AfficherPlateauAttaqueJ1 (Position[][] plateau) {
         for (int i = 0; i < plateau.length; i++) {
             System.out.println();

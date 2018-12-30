@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class Main {
 
-    public int[] coordonnees(char ligne,int colonne)
+    public static int[] coordonnees(char ligne,int colonne)
     {
         int Ligne=-1;
         int Colonne=colonne-1;
@@ -21,7 +21,7 @@ public class Main {
     }
 
 
-    public void TirJ1 (Position [][] plateau, Player J1, int[] coordonnees){
+    public static void TirJ1 (Position [][] plateau, Player J1, int[] coordonnees){
         //il va falloir faire 2 fonctions tir pour les deux joueurs..
         if (plateau [coordonnees[0]][coordonnees[1]].tire_joueur_1 == true) {
             System.out.println("Vous avez deja tire sur cette case. Veuillez renseigner une autre cible");
@@ -35,7 +35,7 @@ public class Main {
         }
     } //fonction tir ordi differentes dans modif booleens
 
-    public void estCouleJ1 (Position [][] plateau, Player J1, int[] coordonnees){
+    public static void estCouleJ1 (Position [][] plateau, Player J1, int[] coordonnees){
         int id = plateau [coordonnees[0]][coordonnees[1]].getId_bateau_joueur_2();
         int cpt = 0;
         int[] stock= new int [20];
@@ -63,7 +63,7 @@ public class Main {
         }
     } //fonciton estCoule diff pour ordi dans la modif des booleens
 
-    public boolean placer_bateau_J1 (Position[][]plateau, int taille, int[]coordonnees, boolean horizontal, int id){
+    public static boolean placer_bateau_J1 (Position[][]plateau, int taille, int[]coordonnees, boolean horizontal, int id){
         int hauteur = plateau.length;
         int largeur = plateau[0].length;
         boolean effectue =false;
@@ -105,7 +105,7 @@ public class Main {
         return(effectue);
     }
 
-    public void AfficherPlateauJ1 (Position[][] plateau){
+    public static void AfficherPlateauJ1 (Position[][] plateau){
         for (int i=0; i<plateau.length; i++){
             System.out.println();
             for (int j=0; j<plateau[0].length; j++){
@@ -126,7 +126,7 @@ public class Main {
         }
     } //a verifier que j'eusse fait tous les cas
 
-    public void AfficherPlateauAttaqueJ1 (Position[][] plateau) {
+    public static void AfficherPlateauAttaqueJ1 (Position[][] plateau) {
         for (int i = 0; i < plateau.length; i++) {
             System.out.println();
             for (int j = 0; j < plateau[0].length; j++) {
@@ -142,7 +142,7 @@ public class Main {
         }
     } //a verifier que j'ai fait tous les cas
 
-    public Bateau placement(Position[][]plateau, int taille, int id,String name_joueur){
+    public static Bateau placement(Position[][]plateau, int taille, int id,String name_joueur){
 
         String name1;
         int colonne;
@@ -163,7 +163,7 @@ public class Main {
             System.out.println("Veuillez saisir la colonne (chiffre) de l'emplacement de votre bateau de taille "+ taille);
             colonne = sc.nextInt();
 
-            System.out.println("Voulez-vous placer votre bateau à l'Horizontale (H) ou à la verticale (V) ?");
+            System.out.println("Voulez-vous placer votre bateau à l'horizontale (H) ou à la verticale (V) ?");
             String Str = sc.nextLine();
             reponse = Str.charAt(0);
 
@@ -200,7 +200,7 @@ public class Main {
     }
 
 
-    public void Jeu(int hauteur, int largeur){
+    public static void Jeu(int hauteur, int largeur){
 
 
         Position[][] plateau = new Position[hauteur][largeur];
@@ -211,22 +211,23 @@ public class Main {
 
         List<Bateau> bateaux1 = new ArrayList<Bateau>();
 
-        Bateau bateau;
+
         for (int i=2;i<=6;i++ ){
+            AfficherPlateauJ1(plateau);
+            bateaux1.add(placement(plateau,i,i+98,name1));
 
-            bateaux1.add(placement(plateau,i,i-1,name1));
         }
-
-        Player J1=new Player(name1,bateaux1,0,0);
+        AfficherPlateauJ1(plateau);
+        Player J1=new Player(name1,bateaux1,0,5);
 
 
     }
 
     public static void main(String[] args) {
-
-        System.out.print("Hello world");
-        Plateau p = new Plateau(10,10);
-        p.displayBoard();
+        Jeu(10,10);
+       // System.out.print("Hello world");
+        // Plateau p = new Plateau(10,10);
+        // p.displayBoard();
 
 
     }

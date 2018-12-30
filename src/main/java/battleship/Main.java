@@ -60,6 +60,49 @@ public class Main {
         }
     } //fonciton estCoule diff pour ordi dans la modif des booleens
 
+    public static boolean placer_bateau_Ordi (Position[][]plateau, int taille, int[]coordonnees, boolean horizontal, int id){
+        int hauteur = plateau.length;
+        int largeur = plateau[0].length;
+        boolean effectue =false;
+        boolean place =true;
+        if (coordonnees[0]>=0 && coordonnees[0]<hauteur && coordonnees[1]>=0 && coordonnees[1]<largeur) {
+            if (horizontal) {
+                if (coordonnees[1]+taille <= largeur){
+                    for (int i =coordonnees[1];i<coordonnees[1]+taille; i++ ){
+                        if (plateau[coordonnees[0]][i].bateau_joueur_2){
+                            place=false;
+                        }
+                    }
+                    if (place){
+                        for (int i =coordonnees[1];i<coordonnees[1]+taille; i++){
+                            plateau[coordonnees[0]][i].bateau_joueur_2 = true;
+                            plateau[coordonnees[0]][i].id_bateau_joueur_2 = id;
+                            effectue=true;
+                        }
+                    }
+                }
+            }
+            else {
+                if (coordonnees[0]+taille <= hauteur){
+                    for (int i =coordonnees[0];i<coordonnees[0]+taille; i++){
+                        if ((plateau[i][coordonnees[1]]).bateau_joueur_2){
+                            place=false;
+                        }
+                    }
+                    if (place){
+                        for (int i =coordonnees[0];i<coordonnees[0]+taille; i++ ){
+                            plateau[i][coordonnees[1]].bateau_joueur_2 = true;
+                            plateau[i][coordonnees[1]].id_bateau_joueur_2 = id;
+                            effectue=true;
+                        }
+                    }
+                }
+            }
+        }
+        return(effectue);
+    }
+
+
     public static boolean placer_bateau_J1 (Position[][]plateau, int taille, int[]coordonnees, boolean horizontal, int id){
         int hauteur = plateau.length;
         int largeur = plateau[0].length;
@@ -125,48 +168,6 @@ public class Main {
         return(effectue);
     }
 
-    public static boolean placer_bateau_Ordi (Position[][]plateau, int taille, int[]coordonnees, boolean horizontal, int id){
-        int hauteur = plateau.length;
-        int largeur = plateau[0].length;
-        boolean effectue =false;
-        boolean place =true;
-        if (coordonnees[0]>=0 && coordonnees[0]<hauteur && coordonnees[1]>=0 && coordonnees[1]<largeur) {
-            if (horizontal) {
-                if (coordonnees[1]+taille <= largeur){
-                    for (int i =coordonnees[1];i<coordonnees[1]+taille; i++ ){
-                        if (plateau[coordonnees[0]][i].bateau_joueur_2){
-                            place=false;
-                        }
-                    }
-                    if (place){
-                        for (int i =coordonnees[1];i<coordonnees[1]+taille; i++){
-                            plateau[coordonnees[0]][i].bateau_joueur_2 = true;
-                            plateau[coordonnees[0]][i].id_bateau_joueur_2 = id;
-                            effectue=true;
-                        }
-                    }
-                }
-            }
-            else {
-                if (coordonnees[0]+taille <= hauteur){
-                    for (int i =coordonnees[0];i<coordonnees[0]+taille; i++){
-                        if ((plateau[i][coordonnees[1]]).bateau_joueur_2){
-                            place=false;
-                        }
-                    }
-                    if (place){
-                        for (int i =coordonnees[0];i<coordonnees[0]+taille; i++ ){
-                            plateau[i][coordonnees[1]].bateau_joueur_2 = true;
-                            plateau[i][coordonnees[1]].id_bateau_joueur_2 = id;
-                            effectue=true;
-                        }
-                    }
-                }
-            }
-        }
-        return(effectue);
-    }
-
     public static void AfficherPlateauJ1 (Position[][] plateau){
         System.out.print("  12345678910");
         for (int i=0; i<plateau.length; i++){
@@ -192,7 +193,7 @@ public class Main {
         System.out.println();
     } //a verifier que j'eusse fait tous les cas
 
-    //qsdfghjkl
+
 
     public static void AfficherPlateauAttaqueJ1 (Position[][] plateau) {
         for (int i = 0; i < plateau.length; i++) {
@@ -248,6 +249,55 @@ public class Main {
         return(bateau);
     }
 
+    public static Bateau placement2(Position[][]plateau, int taille, int id,String name_joueur){
+
+
+        int [] coordonnees =new int[2];
+        boolean placement=false;
+        int ligne=0;
+        int colonne=0;
+
+        int test= (int)(Math.random());
+        boolean  horizontal= test>=0.5;
+
+        while (placement==false){
+
+            if (horizontal){
+                ligne = (int)(Math.random() * plateau.length);
+                colonne = (int)(Math.random() * plateau[0].length-taille);
+            }
+
+            else{
+                ligne = (int)(Math.random() * plateau.length-taille);
+                colonne = (int)(Math.random() * plateau[0].length);
+            }
+
+            coordonnees[0]=ligne;
+            coordonnees[1]=colonne;
+
+            placement=placer_bateau_Ordi(plateau,taille,coordonnees,horizontal,id);
+            test= (int)(Math.random());
+            horizontal= test>=0.5;
+
+        }
+        int[][]positions=new int[taille][2];
+        if (horizontal==true){
+            for (int i=0; i<taille;i++){
+                positions[i][0]=coordonnees[0];
+                positions[i][1]=coordonnees[1]+i;
+            }
+        }
+        else{
+            for (int i=0; i<taille;i++){
+                positions[i][0]=coordonnees[0]+i;
+                positions[i][1]=coordonnees[1];
+            }
+        }
+        Bateau bateau = new Bateau(name_joueur,id,taille,positions,false);
+        return(bateau);
+    }
+
+
     public static int[] EntrerCoordonnes() {
         int Ligne=-1;
         int[] coordonnees = new int[2];
@@ -282,7 +332,7 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         String name1 = sc.nextLine();
         List<Bateau> bateaux1 = new ArrayList<Bateau>();
-        for (int i=2;i<=3;i++ ){
+        for (int i=2;i<=2;i++ ){
             AfficherPlateauJ1(plateau);
             System.out.println();
             bateaux1.add(placement(plateau,i,i+98,name1));

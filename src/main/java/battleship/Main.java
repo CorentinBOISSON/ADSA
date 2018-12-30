@@ -125,6 +125,48 @@ public class Main {
         return(effectue);
     }
 
+    public static boolean placer_bateau_Ordi (Position[][]plateau, int taille, int[]coordonnees, boolean horizontal, int id){
+        int hauteur = plateau.length;
+        int largeur = plateau[0].length;
+        boolean effectue =false;
+        boolean place =true;
+        if (coordonnees[0]>=0 && coordonnees[0]<hauteur && coordonnees[1]>=0 && coordonnees[1]<largeur) {
+            if (horizontal) {
+                if (coordonnees[1]+taille <= largeur){
+                    for (int i =coordonnees[1];i<coordonnees[1]+taille; i++ ){
+                        if (plateau[coordonnees[0]][i].bateau_joueur_2){
+                            place=false;
+                        }
+                    }
+                    if (place){
+                        for (int i =coordonnees[1];i<coordonnees[1]+taille; i++){
+                            plateau[coordonnees[0]][i].bateau_joueur_2 = true;
+                            plateau[coordonnees[0]][i].id_bateau_joueur_2 = id;
+                            effectue=true;
+                        }
+                    }
+                }
+            }
+            else {
+                if (coordonnees[0]+taille <= hauteur){
+                    for (int i =coordonnees[0];i<coordonnees[0]+taille; i++){
+                        if ((plateau[i][coordonnees[1]]).bateau_joueur_2){
+                            place=false;
+                        }
+                    }
+                    if (place){
+                        for (int i =coordonnees[0];i<coordonnees[0]+taille; i++ ){
+                            plateau[i][coordonnees[1]].bateau_joueur_2 = true;
+                            plateau[i][coordonnees[1]].id_bateau_joueur_2 = id;
+                            effectue=true;
+                        }
+                    }
+                }
+            }
+        }
+        return(effectue);
+    }
+
     public static void AfficherPlateauJ1 (Position[][] plateau){
         System.out.print("  12345678910");
         for (int i=0; i<plateau.length; i++){
@@ -238,7 +280,7 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         String name1 = sc.nextLine();
         List<Bateau> bateaux1 = new ArrayList<Bateau>();
-        for (int i=2;i<=2;i++ ){
+        for (int i=2;i<=3;i++ ){
             AfficherPlateauJ1(plateau);
             System.out.println();
             bateaux1.add(placement(plateau,i,i+98,name1));

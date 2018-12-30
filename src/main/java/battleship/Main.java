@@ -192,6 +192,31 @@ public class Main {
         System.out.println();
     } //a verifier que j'eusse fait tous les cas
 
+    public static void AfficherPlateauOrdi (Position[][] plateau){
+        System.out.print("  12345678910");
+        for (int i=0; i<plateau.length; i++){
+            String lettres [] = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J"};
+            System.out.println();
+            System.out.print(lettres[i] + " ");
+            for (int j=0; j<plateau[0].length; j++){
+                Position p = plateau[i][j];
+                if(p.id_bateau_joueur_2 == 0 && p.tire_joueur_1 == false){
+                    System.out.print(0);
+                }
+                else if (p.id_bateau_joueur_2 == 0 && p.tire_joueur_1 == true){
+                    System.out.print('*');
+                }
+                else if (p.id_bateau_joueur_2 != 0 && p.bateau_joueur_2_touche == false){
+                    System.out.print(1);
+                }
+                else if (p.id_bateau_joueur_2 != 0 && p.bateau_joueur_2_touche == true){
+                    System.out.print('X');
+                }
+            }
+        }
+        System.out.println();
+    } //a verifier que j'eusse fait tous les cas
+
     public static void AfficherPlateauAttaqueJ1 (Position[][] plateau) {
         for (int i = 0; i < plateau.length; i++) {
             System.out.println();
@@ -343,14 +368,7 @@ public class Main {
         }
         Player J2=new Player("Ordinateur",bateaux2,0,5);
 
-
-        //test fonction tirer
-        plateau[0][0].bateau_joueur_2 = true;
-        plateau[0][0].id_bateau_joueur_2 = 500;
-
-        plateau[0][1].bateau_joueur_2 = true;
-        plateau[0][1].id_bateau_joueur_2 = 500;
-        //test fonction tirer
+        AfficherPlateauOrdi(plateau);
 
         TirJ1(plateau, J1);
         TirJ1(plateau, J1);

@@ -58,17 +58,4 @@ public class Plateau {
     }
 
 
-    public void isSinked (int [][] grilleBateau, int [] coordonnee){
-        //balayage ligne
-        for (int j=coordonnee[1]; j< width; j++){
-            if (grilleBateau[coordonnee[0]][j] == 1){
-
-            }
-        }
-
-
-
-    }
-
-
     }

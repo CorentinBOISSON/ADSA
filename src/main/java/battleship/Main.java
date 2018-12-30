@@ -60,25 +60,7 @@ public class Main {
         return(effectue);
     }
 
-    public void Tir (int[][] grilleTirEffectueJ1, int[][] grilleBateauJ2, int[] coordonnes){
-            //0 -> rien ; 1->bateau ; 2->tir dans l'eau ; 3->bateau touche
-            if (grilleTirEffectueJ1[coordonnes[0]][coordonnes[1]] != 0) {
-                System.out.println("Vous avez deja tire sur cette case. Veuillez renseigner une autre cible");
-            }
-            else{
-                if (grilleBateauJ2[coordonnes[0]][coordonnes[1]] == 1) {
-                    grilleBateauJ2[coordonnes[0]][coordonnes[1]] = 3; //bateau adverse touche
-                    grilleTirEffectueJ1[coordonnes[0]][coordonnes[1]] = 3; //actualise grille de tir du joueur
-                    System.out.println("Vous avez touche un bateau.");
-                    //Appel fonction verifie si bateau coule
-                }
-                if (grilleBateauJ2[coordonnes[0]][coordonnes[1]] == 0){
-                    grilleBateauJ2[coordonnes[0]][coordonnes[1]] = 2; //bateau adverse touche
-                    grilleTirEffectueJ1[coordonnes[0]][coordonnes[1]] = 2; //actualise grille de tir du joueur
-                    System.out.println("Vous avez tire dans l'eau.");
-                }
-            }
-        }
+
 
     public void Jeu(int hauteur, int largeur){
 

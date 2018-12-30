@@ -279,8 +279,8 @@ public class Main {
         int ligne=0;
         int colonne=0;
 
-        int test= (int)(Math.random());
-        boolean  horizontal= test>=0.5;
+        int test= (int)(Math.random()*100);
+        boolean  horizontal= test>=50;
 
         while (placement==false){
 
@@ -298,8 +298,8 @@ public class Main {
             coordonnees[1]=colonne;
 
             placement=placer_bateau_Ordi(plateau,taille,coordonnees,horizontal,id);
-            test= (int)(Math.random());
-            horizontal= test>=0.5;
+            test= (int)(Math.random()*100);
+            horizontal= test>=50;
 
         }
         int[][]positions=new int[taille][2];
@@ -353,7 +353,7 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         String name1 = sc.nextLine();
         List<Bateau> bateaux1 = new ArrayList<Bateau>();
-        for (int i=2;i<=6;i++ ){
+        for (int i=2;i<=2;i++ ){
             AfficherPlateauJ1(plateau);
             System.out.println();
             bateaux1.add(placement(plateau,i,i+98,name1));

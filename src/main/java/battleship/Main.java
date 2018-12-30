@@ -1,9 +1,10 @@
 package battleship;
+
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Main {
+class Main {
 
     public static int[] coordonnees(char ligne,int colonne)
     {
@@ -15,7 +16,7 @@ public class Main {
         else{
             if (code >=97 && code <=107){
                 Ligne=code-97;}
-            }
+        }
 
         return(new int[]{Ligne, Colonne});
     }
@@ -109,17 +110,16 @@ public class Main {
         for (int i=0; i<plateau.length; i++){
             System.out.println();
             for (int j=0; j<plateau[0].length; j++){
-                Position p = plateau[i][j];
-                if(p.getId_bateau_joueur_1() == 0 && p.tire_joueur_2 == false){
+                if(plateau[i][j].id_bateau_joueur_1 == 0 && plateau[i][j].tire_joueur_2 == false){
                     System.out.print(0);
                 }
-                else if (p.getId_bateau_joueur_1() == 0 && p.tire_joueur_2 == true){
+                else if (plateau[i][j].getId_bateau_joueur_1() == 0 && plateau[i][j].tire_joueur_2 == true){
                     System.out.print('*');
                 }
-                else if (p.getId_bateau_joueur_1() != 0 && p.bateau_joueur_1_touche == false){
+                else if (plateau[i][j].getId_bateau_joueur_1() != 0 && plateau[i][j].bateau_joueur_1_touche == false){
                     System.out.print(1);
                 }
-                else if (p.getId_bateau_joueur_1() != 0 && p.bateau_joueur_1_touche == true){
+                else if (plateau[i][j].getId_bateau_joueur_1() != 0 && plateau[i][j].bateau_joueur_1_touche == true){
                     System.out.print('X');
                 }
             }
@@ -225,7 +225,7 @@ public class Main {
 
     public static void main(String[] args) {
         Jeu(10,10);
-       // System.out.print("Hello world");
+        // System.out.print("Hello world");
         // Plateau p = new Plateau(10,10);
         // p.displayBoard();
 

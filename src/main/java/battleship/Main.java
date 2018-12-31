@@ -6,18 +6,18 @@ import java.util.Scanner;
 
 public class Main {
 
-    public static void TirJ1 (Position [][] plateau, Player J1) {
+    private static void TirJ1(Position[][] plateau, Player J1) {
         //il va falloir faire 2 fonctions tir pour les deux joueurs..
-        System.out.println("C'est a votre tour de tirer.");
+        System.out.println("C'est à votre tour de tirer.");
         int[] coordonnees = EntrerCoordonnes();
 
-        if (plateau[coordonnees[0]][coordonnees[1]].tire_joueur_1 == true) {
-            System.out.println("Vous avez deja tire sur cette case. Veuillez renseigner une autre cible");
+        if (plateau[coordonnees[0]][coordonnees[1]].tire_joueur_1) {
+            System.out.println("Vous avez déjà tiré sur cette case. Veuillez renseigner une autre cible");
             System.out.println();
         }
         else {
             plateau[coordonnees[0]][coordonnees[1]].tire_joueur_1 = true; //verif
-            if (plateau[coordonnees[0]][coordonnees[1]].bateau_joueur_2 == false) {
+            if (!plateau[coordonnees[0]][coordonnees[1]].bateau_joueur_2) {
                 System.out.println("Dans l'eau !");
                 System.out.println();
             }
@@ -29,17 +29,17 @@ public class Main {
         } //fonction tir ordi differentes dans modif booleens
     }
 
-    public static void estCouleJ1 (Position [][] plateau, Player J1, int[] coordonnees){
+    private static void estCouleJ1(Position[][] plateau, Player J1, int[] coordonnees){
         int id = plateau [coordonnees[0]][coordonnees[1]].id_bateau_joueur_2;
         int cpt = 0;
-        int[] stock= new int [20];
+        int[] stock = new int [20];
         int k = 0;
         for (int i = 0; i < plateau.length; i++) {
             for (int j = 0; j < plateau[0].length; j++) {
-                if (plateau[i][j].bateau_joueur_2_touche == false && plateau[i][j].id_bateau_joueur_2 == id) {
+                if (!plateau[i][j].bateau_joueur_2_touche && plateau[i][j].id_bateau_joueur_2 == id) {
                     cpt++;
                 }
-                else if (plateau[i][j].bateau_joueur_2_touche == true && plateau[i][j].id_bateau_joueur_2 == id){
+                else if (plateau[i][j].bateau_joueur_2_touche && plateau[i][j].id_bateau_joueur_2 == id){
                     stock[k] = i;
                     stock [k+1] = j;
                     k++;
@@ -60,7 +60,7 @@ public class Main {
         }
     } //fonciton estCoule diff pour ordi dans la modif des booleens
 
-    public static boolean placer_bateau_Ordi (Position[][]plateau, int taille, int[]coordonnees, boolean horizontal, int id){
+    private static boolean placer_bateau_Ordi(Position[][] plateau, int taille, int[] coordonnees, boolean horizontal, int id){
         int hauteur = plateau.length;
         int largeur = plateau[0].length;
         boolean effectue =false;
@@ -102,7 +102,7 @@ public class Main {
         return(effectue);
     }
 
-    public static boolean placer_bateau_J1 (Position[][]plateau, int taille, int[]coordonnees, boolean horizontal, int id){
+    private static boolean placer_bateau_J1(Position[][] plateau, int taille, int[] coordonnees, boolean horizontal, int id){
         int hauteur = plateau.length;
         int largeur = plateau[0].length;
         boolean effectue =false;
@@ -167,24 +167,24 @@ public class Main {
         return(effectue);
     }
 
-    public static void AfficherPlateauJ1 (Position[][] plateau){
+    private static void AfficherPlateauJ1(Position[][] plateau){
         System.out.print("  12345678910");
         for (int i=0; i<plateau.length; i++){
-            String lettres [] = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J"};
+            String[] lettres = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J"};
             System.out.println();
             System.out.print(lettres[i] + " ");
             for (int j=0; j<plateau[0].length; j++){
                 Position p = plateau[i][j];
-                if(p.id_bateau_joueur_1 == 0 && p.tire_joueur_2 == false){
+                if(p.id_bateau_joueur_1 == 0 && !p.tire_joueur_2){
                     System.out.print(0);
                 }
-                else if (p.id_bateau_joueur_1 == 0 && p.tire_joueur_2 == true){
+                else if (p.id_bateau_joueur_1 == 0){
                     System.out.print('*');
                 }
-                else if (p.id_bateau_joueur_1 != 0 && p.bateau_joueur_1_touche == false){
+                else if (!p.bateau_joueur_1_touche){
                     System.out.print(1);
                 }
-                else if (p.id_bateau_joueur_1 != 0 && p.bateau_joueur_1_touche == true){
+                else {
                     System.out.print('X');
                 }
             }
@@ -192,24 +192,24 @@ public class Main {
         System.out.println();
     } //a verifier que j'eusse fait tous les cas
 
-    public static void AfficherPlateauOrdi (Position[][] plateau){
+    private static void AfficherPlateauOrdi(Position[][] plateau){
         System.out.print("  12345678910");
         for (int i=0; i<plateau.length; i++){
-            String lettres [] = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J"};
+            String[] lettres = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J"};
             System.out.println();
             System.out.print(lettres[i] + " ");
             for (int j=0; j<plateau[0].length; j++){
                 Position p = plateau[i][j];
-                if(p.id_bateau_joueur_2 == 0 && p.tire_joueur_1 == false){
+                if(p.id_bateau_joueur_2 == 0 && !p.tire_joueur_1){
                     System.out.print(0);
                 }
-                else if (p.id_bateau_joueur_2 == 0 && p.tire_joueur_1 == true){
+                else if (p.id_bateau_joueur_2 == 0){
                     System.out.print('*');
                 }
-                else if (p.id_bateau_joueur_2 != 0 && p.bateau_joueur_2_touche == false){
+                else if (!p.bateau_joueur_2_touche){
                     System.out.print(1);
                 }
-                else if (p.id_bateau_joueur_2 != 0 && p.bateau_joueur_2_touche == true){
+                else {
                     System.out.print('X');
                 }
             }
@@ -218,15 +218,15 @@ public class Main {
     } //a verifier que j'eusse fait tous les cas
 
     public static void AfficherPlateauAttaqueJ1 (Position[][] plateau) {
-        for (int i = 0; i < plateau.length; i++) {
+        for (Position[] plateau1 : plateau) {
             System.out.println();
             for (int j = 0; j < plateau[0].length; j++) {
-                Position p = plateau[i][j];
-                if (p.tire_joueur_1 == false) {
+                Position p = plateau1[j];
+                if (!p.tire_joueur_1) {
                     System.out.print(0);
-                } else if (p.tire_joueur_1 == true && p.bateau_joueur_2 == false) {
+                } else if (!p.bateau_joueur_2) {
                     System.out.print('*'); //tir dans l'eau
-                } else if (p.bateau_joueur_2_touche == true) {
+                } else if (p.bateau_joueur_2_touche) {
                     System.out.print('X');
                 }
             }
@@ -234,13 +234,13 @@ public class Main {
         }
     } //a verifier que j'ai fait tous les cas
 
-    public static Bateau placement(Position[][]plateau, int taille, int id,String name_joueur){
+    private static Bateau placement(Position[][] plateau, int taille, int id, String name_joueur){
         String name1;
         char reponse;
         boolean horizontal = true;
         int [] coordonnees =new int[2];
         boolean placement=false;
-        while (placement==false){
+        while (!placement){
             System.out.println("Placement du bateau de taille " + taille + " :");
             coordonnees = EntrerCoordonnes();
             ///
@@ -254,16 +254,15 @@ public class Main {
             }
             placement=placer_bateau_J1(plateau,taille,coordonnees,horizontal,id);
         }
-        int[][]positions=new int[taille][2];
+        int[][]positions;
         positions = TestHorizontal(horizontal,coordonnees,taille);
 
-        Bateau bateau = new Bateau(name_joueur,id,taille,positions,false);
-        return(bateau);
+        return(new Bateau(name_joueur,id,taille,positions,false));
     }
 
-    public static int [][] TestHorizontal(boolean horizontal, int [] coordonnees, int taille) {
+    private static int [][] TestHorizontal(boolean horizontal, int[] coordonnees, int taille) {
         int[][] positions = new int[taille][2];
-        if (horizontal == true) {
+        if (horizontal) {
             for (int i = 0; i < taille; i++) {
                 positions[i][0] = coordonnees[0];
                 positions[i][1] = coordonnees[1] + i;
@@ -277,16 +276,16 @@ public class Main {
         return positions;
     }
 
-    public static Bateau placement2(Position[][]plateau, int taille, int id,String name_joueur){
+    private static Bateau placement2(Position[][] plateau, int taille, int id, String name_joueur){
         int [] coordonnees =new int[2];
         boolean placement=false;
-        int ligne=0;
-        int colonne=0;
+        int ligne;
+        int colonne;
 
         int test= (int)(Math.random()*100);
         boolean  horizontal= test>=50;
 
-        while (placement==false){
+        while (!placement){
 
             if (horizontal){
                 ligne = (int)(Math.random() * plateau.length);
@@ -306,14 +305,13 @@ public class Main {
             horizontal= test>=50;
 
         }
-        int[][]positions=new int[taille][2];
+        int[][]positions;
         positions = TestHorizontal(horizontal,coordonnees,taille);
 
-        Bateau bateau = new Bateau(name_joueur,id,taille,positions,false);
-        return(bateau);
+        return(new Bateau(name_joueur,id,taille,positions,false));
     }
 
-    public static int[] EntrerCoordonnes() {
+    private static int[] EntrerCoordonnes() {
         int Ligne=-1;
         int[] coordonnees = new int[2];
         System.out.println("Veuillez saisir la ligne (lettre) :");
@@ -336,7 +334,7 @@ public class Main {
         return(new int[]{Ligne, Colonne});
     }
 
-    public static void Jeu(int hauteur, int largeur){
+    private static void Jeu(int hauteur, int largeur){
         Position[][] plateau = new Position[hauteur][largeur];
         for (int i=0;i<hauteur;i++) {
             for (int j=0;j<largeur;j++){
@@ -371,7 +369,7 @@ public class Main {
         //fonction estCoulee penser a modif attribut nbBato et List<Bato> du joueur
     }
 
-    public static int readInt(Scanner scanner, String prompt, String promptOnError) {
+    private static int readInt(Scanner scanner, String prompt, String promptOnError) {
 
         System.out.println(prompt);
         //!scanner.hasNextInt()
@@ -380,9 +378,8 @@ public class Main {
             scanner.nextLine(); // vidage saisie incorrect
         }
 
-        final int input = scanner.nextInt();
         //scanner.nextLine(); // vidage buffer
-        return input;
+        return scanner.nextInt();
     }
 
     public static void main(String[] args) {

@@ -356,6 +356,228 @@ public class Main {
         return(new int[]{Ligne, Colonne});
     }
 
+    private static boolean StrategieOrdi(Position[][] plateau, Player J2, Memory memory){
+
+        int tire =3;
+        boolean touche=false;
+        int[]coordonnees=new int[2];
+        int ligne =0;
+        int colonne=0;
+
+        if (memory.random) {
+
+            while (tire == 3) {
+                ligne = (int) (Math.random() * plateau.length);
+
+                if (ligne % 2 == 0) {
+                    colonne = (((int) (Math.random() * (plateau[0].length) / 2)) * 2) + 1;
+                } else {
+                    colonne = ((int) (Math.random() * (plateau[0].length) / 2)) * 2;
+                }
+
+
+                coordonnees[0] = ligne;
+                coordonnees[1] = colonne;
+
+                tire = TirOrdi(plateau, J2, coordonnees);
+
+                if (tire == 2 || tire == 0) {
+                    memory.random = true;
+                }
+
+                if (tire == 1) {
+                    memory.random = false;
+                }
+
+                if (tire == 1 || tire == 2) {
+                    memory.impact = coordonnees;
+                    memory.shootsB=memory.shootsH=memory.shootsD=memory.shootsG=1;
+                }
+
+            }
+        }
+
+        else {
+            while (tire == 3) {
+
+
+                if (memory.haut) {
+                    coordonnees[0] = memory.impact[0]-memory.shootsH;
+                    coordonnees[1] = memory.impact[1];
+
+                    if (coordonnees[0]>=0 && coordonnees[0]<plateau.length && coordonnees[1]>=0 && coordonnees[1]<plateau[0].length){
+                        tire = TirOrdi(plateau, J2, coordonnees);
+
+                    }
+                    else{
+                        memory.haut=false;
+                    }
+
+                    if (tire == 2) {
+                        memory.random = true;
+                        memory.haut=true;
+                        memory.bas=true;
+                        memory.droite=true;
+                        memory.gauche=true;
+                        memory.shootsB=memory.shootsH=memory.shootsD=memory.shootsG=0;
+                    }
+
+                    if (tire == 1) {
+                        memory.shootsH++;
+                    }
+
+                    if (tire == 0) {
+                        memory.haut=false;
+                    }
+
+                    if (tire == 3) {
+                        memory.haut=false;
+                    }
+
+                }
+                else {
+
+                    if (memory.bas) {
+
+                        coordonnees[0] = memory.impact[0]+memory.shootsB;
+                        coordonnees[1] = memory.impact[1];
+
+                        if (coordonnees[0]>=0 && coordonnees[0]<plateau.length && coordonnees[1]>=0 && coordonnees[1]<plateau[0].length){
+                            tire = TirOrdi(plateau, J2, coordonnees);
+
+                        }
+                        else{
+                            memory.bas=false;
+                        }
+
+                        if (tire == 2) {
+                            memory.random = true;
+                            memory.haut=true;
+                            memory.bas=true;
+                            memory.droite=true;
+                            memory.gauche=true;
+                            memory.shootsB=memory.shootsH=memory.shootsD=memory.shootsG=0;
+                        }
+
+                        if (tire == 1) {
+                            memory.shootsB++;
+                        }
+
+                        if (tire == 0) {
+                            memory.bas=false;
+                        }
+
+                        if (tire == 3) {
+                            memory.bas=false;
+                        }
+
+
+                    }
+                    else {
+
+                        if (memory.droite) {
+
+                            coordonnees[0] = memory.impact[0];
+                            coordonnees[1] = memory.impact[1]+memory.shootsD;
+
+                            if (coordonnees[0]>=0 && coordonnees[0]<plateau.length && coordonnees[1]>=0 && coordonnees[1]<plateau[0].length){
+                                tire = TirOrdi(plateau, J2, coordonnees);
+
+                            }
+                            else{
+                                memory.droite=false;
+                            }
+
+                            if (tire == 2) {
+                                memory.random = true;
+                                memory.haut=true;
+                                memory.bas=true;
+                                memory.droite=true;
+                                memory.gauche=true;
+                                memory.shootsB=memory.shootsH=memory.shootsD=memory.shootsG=0;
+                            }
+
+                            if (tire == 1) {
+                                memory.shootsD++;
+                            }
+
+                            if (tire == 0) {
+                                memory.droite=false;
+                            }
+
+                            if (tire == 3) {
+                                memory.droite=false;
+                            }
+
+
+                        }
+                        else {
+
+                            if (memory.gauche) {
+
+                                coordonnees[0] = memory.impact[0];
+                                coordonnees[1] = memory.impact[1]-memory.shootsG;
+
+                                if (coordonnees[0]>=0 && coordonnees[0]<plateau.length && coordonnees[1]>=0 && coordonnees[1]<plateau[0].length){
+                                    tire = TirOrdi(plateau, J2, coordonnees);
+
+                                }
+                                else{
+                                    memory.gauche=false;
+                                }
+
+                                if (tire == 2) {
+                                    memory.random = true;
+                                    memory.haut=true;
+                                    memory.bas=true;
+                                    memory.droite=true;
+                                    memory.gauche=true;
+                                    memory.shootsB=memory.shootsH=memory.shootsD=memory.shootsG=0;
+                                }
+
+                                if (tire == 1) {
+                                    memory.shootsG++;
+                                }
+
+                                if (tire == 0) {
+                                    memory.gauche=false;
+                                }
+
+                                if (tire == 3) {
+                                    memory.gauche=false;
+                                }
+
+
+                            }
+                            else {
+                                memory.random = true;
+                                memory.haut=true;
+                                memory.bas=true;
+                                memory.droite=true;
+                                memory.gauche=true;
+                                memory.shootsB=memory.shootsH=memory.shootsD=memory.shootsG=0;
+
+                            }
+
+                        }
+
+                    }
+
+
+                }
+
+
+            }
+        }
+
+        if (tire == 1 || tire == 2) {
+            touche = true;
+        }
+
+        return(touche);
+    }
+
+
     private static void Jeu(int hauteur, int largeur){
         Position[][] plateau = new Position[hauteur][largeur];
         boolean vainqueur=false;
@@ -390,11 +612,11 @@ public class Main {
 
         boolean randoom=true;
         int [] coordonnees=new int[2];
-        int[][]haut=new int[5][2];
-        int[][]bas=new int[5][2];
-        int[][]droite=new int[5][2];
-        int[][]gauche=new int[5][2];
-        Memory memory= new Memory(true,coordonnees,haut,bas,droite,gauche);
+        boolean haut=true;
+        boolean bas=true;
+        boolean droite=true;
+        boolean gauche=true;
+        Memory memory= new Memory(true,coordonnees,haut,bas,droite,gauche,0,0,0,0);
 
        while (J1.nbShip!=0 || J2.nbShip!=0) {
 
@@ -408,13 +630,13 @@ public class Main {
            tour2=true;
 
            while (tour2){
-               tour2=TirOrdi(plateau, J2, memory);
+               tour2=StrategieOrdi(plateau, J2, memory);
            }
 
            AfficherPlateauJ1(plateau);
        }
 
-       if (J1.nbShip!=0)
+       if (J2.nbShip==0)
        {
            System.out.println("L'ordinateur a gagné, retenter votre chance !");
        }
@@ -438,6 +660,8 @@ public class Main {
 
     public static void main(String[] args) {
         Jeu(10,10);
+
+
 
 
 

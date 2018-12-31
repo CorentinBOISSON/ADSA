@@ -29,6 +29,8 @@ public class Main {
         } //fonction tir ordi differentes dans modif booleens
     }
 
+
+
     public static void estCouleJ1 (Position [][] plateau, Player J1, int[] coordonnees){
         int id = plateau [coordonnees[0]][coordonnees[1]].id_bateau_joueur_2;
         int cpt = 0;
@@ -42,7 +44,7 @@ public class Main {
                 else if (plateau[i][j].bateau_joueur_2_touche == true && plateau[i][j].id_bateau_joueur_2 == id){
                     stock[k] = i;
                     stock [k+1] = j;
-                    k++;
+                    k=k+2;
                 }
             }
         }
@@ -51,14 +53,15 @@ public class Main {
             System.out.println();
         }
         else{
-            for (int i = 0; i<k; i++){
-                plateau[i][i+1].bateau_joueur_2_coule = true; //verif please
+            for (int i = 0; i<=k; i=i+2){
+                plateau[stock[i]][stock[i+1]].bateau_joueur_2_coule = true;
                 //Rajouter actualisation class joueur nb de bato
             }
             System.out.println("Felicitation, vous avez coule le bateau adverse !");
             System.out.println();
         }
-    } //fonciton estCoule diff pour ordi dans la modif des booleens
+    } //actualise plateau et informe joueur
+    //fonciton estCoule diff pour ordi dans la modif des booleens
 
     public static boolean placer_bateau_Ordi (Position[][]plateau, int taille, int[]coordonnees, boolean horizontal, int id){
         int hauteur = plateau.length;
@@ -168,71 +171,87 @@ public class Main {
     }
 
     public static void AfficherPlateauJ1 (Position[][] plateau){
-        System.out.print("  12345678910");
+        String blanc = "                                           ";
+        System.out.println(blanc + "Plateau de placement du joueur");
+        System.out.print(blanc + "  |1|2|3|4|5|6|7|8|9|10|");
         for (int i=0; i<plateau.length; i++){
-            String lettres [] = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J"};
             System.out.println();
-            System.out.print(lettres[i] + " ");
+            String lettres [] = {blanc + "|A|", blanc + "|B|", blanc + "|C|", blanc + "|D|", blanc + "|E|", blanc + "|F|", blanc + "|G|", blanc + "|H|", blanc + "|I|", blanc + "|J|"};
+            System.out.print(lettres[i]);
             for (int j=0; j<plateau[0].length; j++){
                 Position p = plateau[i][j];
                 if(p.id_bateau_joueur_1 == 0 && p.tire_joueur_2 == false){
-                    System.out.print(0);
+                    System.out.print(" |");
                 }
                 else if (p.id_bateau_joueur_1 == 0 && p.tire_joueur_2 == true){
-                    System.out.print('*');
+                    System.out.print("*|");
                 }
                 else if (p.id_bateau_joueur_1 != 0 && p.bateau_joueur_1_touche == false){
-                    System.out.print(1);
+                    System.out.print(0 +"|");
                 }
                 else if (p.id_bateau_joueur_1 != 0 && p.bateau_joueur_1_touche == true){
-                    System.out.print('X');
+                    System.out.print("X|");
                 }
             }
         }
         System.out.println();
-    } //a verifier que j'eusse fait tous les cas
+        System.out.print("Legende : | | = eau ; |*| = tir du joueur adverse ; |0| = presence bateau non touche ; |X| = notre position est touchee");
+        System.out.println();
+    }
 
     public static void AfficherPlateauOrdi (Position[][] plateau){
-        System.out.print("  12345678910");
+        String blanc = "                                           ";
+        System.out.print(blanc + "  |1|2|3|4|5|6|7|8|9|10|");
         for (int i=0; i<plateau.length; i++){
-            String lettres [] = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J"};
             System.out.println();
-            System.out.print(lettres[i] + " ");
+            String lettres [] = {blanc + "|A|", blanc + "|B|", blanc + "|C|", blanc + "|D|", blanc + "|E|", blanc + "|F|", blanc + "|G|", blanc + "|H|", blanc + "|I|", blanc + "|J|"};
+            System.out.print(lettres[i]);
             for (int j=0; j<plateau[0].length; j++){
                 Position p = plateau[i][j];
                 if(p.id_bateau_joueur_2 == 0 && p.tire_joueur_1 == false){
-                    System.out.print(0);
+                    System.out.print(" |");
                 }
                 else if (p.id_bateau_joueur_2 == 0 && p.tire_joueur_1 == true){
-                    System.out.print('*');
+                    System.out.print("*|");
                 }
                 else if (p.id_bateau_joueur_2 != 0 && p.bateau_joueur_2_touche == false){
-                    System.out.print(1);
+                    System.out.print(0 +"|");
                 }
                 else if (p.id_bateau_joueur_2 != 0 && p.bateau_joueur_2_touche == true){
-                    System.out.print('X');
+                    System.out.print("X|");
                 }
             }
         }
         System.out.println();
-    } //a verifier que j'eusse fait tous les cas
+        System.out.print("Legende : | | = eau ; |*| = tir du joueur adverse ; |0| = presence bateau non touche ; |X| = notre position est touchee");
+        System.out.println();
+    }
 
     public static void AfficherPlateauAttaqueJ1 (Position[][] plateau) {
+        String blanc = "                                           ";
+        System.out.print(blanc + "Plateau d'attaque du joueur ");
+        System.out.print(blanc + "  |1|2|3|4|5|6|7|8|9|10|");
         for (int i = 0; i < plateau.length; i++) {
             System.out.println();
+            String lettres [] = {blanc + "|A|", blanc + "|B|", blanc + "|C|", blanc + "|D|", blanc + "|E|", blanc + "|F|", blanc + "|G|", blanc + "|H|", blanc + "|I|", blanc + "|J|"};
+            System.out.print(lettres[i]);
             for (int j = 0; j < plateau[0].length; j++) {
                 Position p = plateau[i][j];
                 if (p.tire_joueur_1 == false) {
-                    System.out.print(0);
+                    System.out.print(" |");
                 } else if (p.tire_joueur_1 == true && p.bateau_joueur_2 == false) {
-                    System.out.print('*'); //tir dans l'eau
-                } else if (p.bateau_joueur_2_touche == true) {
-                    System.out.print('X');
+                    System.out.print("*|"); //tir dans l'eau
+                } else if (p.bateau_joueur_2_touche == true && p.bateau_joueur_2_coule == false) { //si touche pas forcement coule
+                    System.out.print("+|");
+                } else if (p.bateau_joueur_2_coule == true) { //si coule forcement...
+                    System.out.print("X|");
                 }
             }
-            System.out.println();
         }
-    } //a verifier que j'ai fait tous les cas
+        System.out.println();
+        System.out.print("Legende : | | = eau ; |*| = tir dans l'eau ; |+| = tir sur bateau adverse ; |X| = bateau adverse coule");
+        System.out.println();
+    }
 
     public static Bateau placement(Position[][]plateau, int taille, int id,String name_joueur){
         String name1;
@@ -343,7 +362,7 @@ public class Main {
                 plateau[i][j]=new Position(false,false,false,false,false,false,false,false,0,0);
             }
         }
-        System.out.println("Veuillez saisir votre nom");
+        System.out.println("Veuillez saisir votre nom :");
         Scanner sc = new Scanner(System.in);
         String name1 = sc.nextLine();
         List<Bateau> bateaux1 = new ArrayList<Bateau>();
@@ -365,9 +384,15 @@ public class Main {
         AfficherPlateauOrdi(plateau);
 
         TirJ1(plateau, J1);
+        AfficherPlateauAttaqueJ1(plateau);
         TirJ1(plateau, J1);
+        AfficherPlateauAttaqueJ1(plateau);
         TirJ1(plateau, J1);
+        AfficherPlateauAttaqueJ1(plateau);
 
+        AfficherPlateauOrdi(plateau);
+
+        //penser fonction ordre daffichage, apres chaque tir ? quand joueur le veux ?
         //fonction estCoulee penser a modif attribut nbBato et List<Bato> du joueur
     }
 

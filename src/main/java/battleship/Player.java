@@ -4,24 +4,24 @@ import java.util.List;
 
 public class Player {
 
-    private String player;
+    private String nom;
     private List<Bateau> Ships;
     private int nbTour;
     private int nbShip;
 
     public Player(String player, List<Bateau> ships, int nbTour, int nbShip) {
-        this.player = player;
+        this.nom = nom;
         Ships = ships;
         this.nbTour = nbTour;
         this.nbShip = nbShip;
     }
 
     public String getPlayer() {
-        return player;
+        return nom;
     }
 
     public void setPlayer(String player) {
-        this.player = player;
+        this.nom = nom;
     }
 
     public List<Bateau> getShips() {

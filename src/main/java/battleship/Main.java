@@ -6,8 +6,9 @@ import java.util.Scanner;
 
 public class Main {
 
-    private static void TirJ1 (Position [][] plateau, Player J1) {
+    private static boolean TirJ1 (Position [][] plateau, Player J1) {
         //il va falloir faire 2 fonctions tir pour les deux joueurs..
+        boolean touche =false;
         System.out.println("C'est à votre tour de tirer.");
         int[] coordonnees = EntrerCoordonnes();
 
@@ -25,8 +26,11 @@ public class Main {
                 System.out.println("Vous avez touche un bateau adverse !");
                 plateau[coordonnees[0]][coordonnees[1]].bateau_joueur_2_touche = true;
                 estCouleJ1(plateau, J1, coordonnees);
+                touche=true;
             }
         } //fonction tir ordi differentes dans modif booleens
+
+        return (touche);
     }
 
     private static void estCouleJ1(Position[][] plateau, Player J1, int[] coordonnees){
@@ -329,6 +333,7 @@ public class Main {
     }
 
     private static int[] EntrerCoordonnes() {
+
         int Ligne=-1;
         int[] coordonnees = new int[2];
         System.out.println("Veuillez saisir la ligne (lettre) :");
@@ -353,6 +358,7 @@ public class Main {
 
     private static void Jeu(int hauteur, int largeur){
         Position[][] plateau = new Position[hauteur][largeur];
+        boolean vainqueur=false;
         for (int i=0;i<hauteur;i++) {
             for (int j=0;j<largeur;j++){
                 plateau[i][j]=new Position(false,false,false,false,false,false,false,false,0,0);
@@ -377,17 +383,26 @@ public class Main {
         }
         Player J2=new Player("Ordinateur",bateaux2,0,5);
 
-        AfficherPlateauOrdi(plateau);
+        boolean tour1;
+        boolean tour2;
 
-        TirJ1(plateau, J1);
-        AfficherPlateauAttaqueJ1(plateau);
-        TirJ1(plateau, J1);
-        AfficherPlateauAttaqueJ1(plateau);
-        TirJ1(plateau, J1);
-        AfficherPlateauAttaqueJ1(plateau);
+       while (J1.nbShip!=0 || J2.nbShip!=0) {
 
-        AfficherPlateauOrdi(plateau);
+           tour1=true;
 
+           while (tour1==true){
+               AfficherPlateauAttaqueJ1(plateau);
+               tour1=TirJ1(plateau, J1);
+           }
+
+           tour2=true;
+
+           while (tour2==true){
+               tour2=TirJ1(plateau, J2);
+           }
+
+           AfficherPlateauJ1(plateau);
+       }
         //penser fonction ordre daffichage, apres chaque tir ? quand joueur le veux ?
         //fonction estCoulee penser a modif attribut nbBato et List<Bato> du joueur
     }
@@ -405,6 +420,9 @@ public class Main {
 
     public static void main(String[] args) {
         Jeu(10,10);
+
+
+
     }
 }
 

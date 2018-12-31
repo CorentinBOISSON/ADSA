@@ -577,20 +577,20 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         String name1 = sc.nextLine();
         List<Bateau> bateaux1 = new ArrayList<Bateau>();
-        for (int i = 2; i <= 3; i++) {
+        for (int i = 2; i <= 6; i++) {
             AfficherPlateauJ1(plateau);
             System.out.println();
             bateaux1.add(placement(plateau, i, i + 98, name1));
         }
         AfficherPlateauJ1(plateau);
         System.out.println();
-        Player J1 = new Player(name1, bateaux1, 0, 2);
+        Player J1 = new Player(name1, bateaux1, 0, 5);
 
         List<Bateau> bateaux2 = new ArrayList<Bateau>();
-        for (int i = 2; i <= 3; i++) {
+        for (int i = 2; i <= 6; i++) {
             bateaux2.add(placement2(plateau, i, i + 198, name1));
         }
-        Player J2 = new Player("Ordinateur", bateaux2, 0, 2);
+        Player J2 = new Player("Ordinateur", bateaux2, 0, 5);
         boolean tour1;
         boolean tour2;
         int [] coordonnees=new int[2];
@@ -602,7 +602,7 @@ public class Main {
        while (J1.nbShip!=0 && J2.nbShip!=0) {
            tour1=true;
            while (tour1){
-               AfficherPlateauOrdi(plateau);   //NE PAS METTRE CETTE LIGNE EN COMMENTAIRE AFIN DE VISUALISER
+               //AfficherPlateauOrdi(plateau);   //NE PAS METTRE CETTE LIGNE EN COMMENTAIRE AFIN DE VISUALISER
                //LES BATEAUX DE L'ORDINATEUR ET AINSI POUVOIR GAGNER LA PARTIE
                AfficherPlateauAttaqueJ1(plateau);
                tour1=TirJ1(plateau, J1);

@@ -376,7 +376,6 @@ public class Main {
     private static int[] EntrerCoordonnes() {
 
         int Ligne=-1;
-        int[] coordonnees = new int[2];
         System.out.println("Veuillez saisir la ligne (lettre) :");
         Scanner sc = new Scanner(System.in);
         String str = sc.nextLine();

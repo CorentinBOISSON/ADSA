@@ -244,6 +244,7 @@ public class Main {
 
     private static void AfficherPlateauOrdi (Position[][] plateau){
         String blanc = "                                           ";
+        System.out.println(blanc + "  Plateau ordinateur petit tricheur");
         System.out.print(blanc + "  |1|2|3|4|5|6|7|8|9|10|");
         for (int i=0; i<plateau.length; i++){
             System.out.println();
@@ -272,7 +273,7 @@ public class Main {
 
     public static void AfficherPlateauAttaqueJ1 (Position[][] plateau) {
         String blanc = "                                           ";
-        System.out.print(blanc + "Plateau d'attaque du joueur ");
+        System.out.println(blanc + "Plateau d'attaque du joueur ");
         System.out.print(blanc + "  |1|2|3|4|5|6|7|8|9|10|");
         for (int i = 0; i < plateau.length; i++) {
             System.out.println();
@@ -376,24 +377,35 @@ public class Main {
     private static int[] EntrerCoordonnes() {
 
         int Ligne=-1;
+        int number =0;
+        int Colonne=0;
+        char ligne='+';
         int[] coordonnees = new int[2];
-        System.out.println("Veuillez saisir la ligne (lettre) :");
+        int code=0;
+        String str ="";
         Scanner sc = new Scanner(System.in);
-        String str = sc.nextLine();
-        char ligne = str.charAt(0);
-
         Scanner sc2 = new Scanner(System.in);
-        int number = readInt(sc2,"Veuillez saisir la colonne (chiffre) :", "Ceci n'est pas un nombre entier inférieur à 10. Recommencez : ");
-        int Colonne = number -1;
 
-        int code = Character.getNumericValue(ligne);
-        if (code >=10 && code <=35){
-            Ligne=code-10;}
-        else{
-            if (code >=97 && code <=107){
-                Ligne=code-97;}
+        while(code <10 || (code >35 && code < 97) || code > 107) {
+
+            System.out.println("Veuillez saisir la ligne (lettre) :");
+            sc = new Scanner(System.in);
+            str = sc.nextLine();
+            ligne = str.charAt(0);
+
+            sc2 = new Scanner(System.in);
+            number = readInt(sc2, "Veuillez saisir la colonne (chiffre) :", "Ceci n'est pas un nombre entier inférieur à 10. Recommencez : ");
+            Colonne = number - 1;
+
+            code = Character.getNumericValue(ligne);
+            if (code >= 10 && code <= 35) {
+                Ligne = code - 10;
+            } else {
+                if (code >= 97 && code <= 107) {
+                    Ligne = code - 97;
+                }
+            }
         }
-
         return(new int[]{Ligne, Colonne});
     }
 
@@ -596,7 +608,8 @@ public class Main {
        while (J1.nbShip!=0 || J2.nbShip!=0) {
            tour1=true;
            while (tour1){
-               AfficherPlateauOrdi (plateau);
+               //AfficherPlateauOrdi(plateau);   NE PAS METTRE CETTE LIGNE EN COMMENTAIRE AFIN DE VISUALISER
+               // LES BATEAUX DE L'ORDINATEUR ET AINSI POUVOIR GAGNER LA PARTIE
                AfficherPlateauAttaqueJ1(plateau);
                tour1=TirJ1(plateau, J1);
            }
@@ -606,8 +619,7 @@ public class Main {
            }
            AfficherPlateauJ1(plateau);
        }
-       if (J2.nbShip==0)
-       {
+       if (J2.nbShip==0) {
            System.out.println("L'ordinateur a gagné, retenter votre chance !");
        }
        else{

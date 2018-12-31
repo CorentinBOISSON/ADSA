@@ -12,12 +12,13 @@ public class Main {
         System.out.println("C'est à votre tour de tirer.");
         int[] coordonnees = EntrerCoordonnes();
 
-        if (plateau[coordonnees[0]][coordonnees[1]].tire_joueur_1) {
+        if (plateau[coordonnees[0]][coordonnees[1]].tire_joueur_1) {//tant que le joueur tir sur un emplacement deja tire, la fonction TirJ1 est appelee
             System.out.println("Vous avez déjà tiré sur cette case. Veuillez renseigner une autre cible");
             System.out.println();
+            TirJ1 (plateau, J1);
         }
         else {
-            plateau[coordonnees[0]][coordonnees[1]].tire_joueur_1 = true; //verif
+            plateau[coordonnees[0]][coordonnees[1]].tire_joueur_1 = true;
             if (!plateau[coordonnees[0]][coordonnees[1]].bateau_joueur_2) {
                 System.out.println("Dans l'eau !");
                 System.out.println();
@@ -25,44 +26,85 @@ public class Main {
             else {
                 System.out.println("Vous avez touche un bateau adverse !");
                 plateau[coordonnees[0]][coordonnees[1]].bateau_joueur_2_touche = true;
-                estCouleJ1(plateau, J1, coordonnees);
+                estCoule(plateau, coordonnees, J1);
                 touche=true;
             }
         } //fonction tir ordi differentes dans modif booleens
-
         return (touche);
     }
 
-    private static void estCouleJ1(Position[][] plateau, Player J1, int[] coordonnees){
-        int id = plateau [coordonnees[0]][coordonnees[1]].id_bateau_joueur_2;
-        int cpt = 0;
-        int[] stock = new int [20];
+    private static int TirOrdi (Position [][] plateau, Player J2, int[] coordonnees) {
+        int tir; //si 0 tir dans l'eau ; si 1 touche bateau de J1 ; si 2 coule bateau de J1 ; si 3 deja tiré
+        if (plateau[coordonnees[0]][coordonnees[1]].tire_joueur_2) {
+            tir = 3;
+        }
+        else {
+            plateau[coordonnees[0]][coordonnees[1]].tire_joueur_2 = true;
+            if (!plateau[coordonnees[0]][coordonnees[1]].bateau_joueur_1) {
+                tir = 0;
+            }
+            else {
+                plateau[coordonnees[0]][coordonnees[1]].bateau_joueur_1_touche = true;
+                tir = estCoule(plateau, coordonnees, J2);
+            }
+        }
+        return tir;
+    }
+
+
+    private static int estCoule(Position[][] plateau, int[] coordonnees, Player J) { //fonction indique si navire adverse est coule
+        int id;
+        if (J.nom == "Ordinateur") {
+            id = plateau[coordonnees[0]][coordonnees[1]].id_bateau_joueur_1;
+        }
+        else{
+            id = plateau[coordonnees[0]][coordonnees[1]].id_bateau_joueur_2;
+        }
+        int tir = 1; //informe la machine, pour l'instant elle a juste touche le bateau de J1
+        boolean estcoule = true;
+        int[] stock = new int[20];
         int k = 0;
         for (int i = 0; i < plateau.length; i++) {
             for (int j = 0; j < plateau[0].length; j++) {
-                if (!plateau[i][j].bateau_joueur_2_touche && plateau[i][j].id_bateau_joueur_2 == id) {
-                    cpt++;
+                if (J.nom == "Ordinateur") {
+                    if (!plateau[i][j].bateau_joueur_1_touche && plateau[i][j].id_bateau_joueur_1 == id) {
+                        estcoule = false;
+                    } else if (plateau[i][j].bateau_joueur_1_touche && plateau[i][j].id_bateau_joueur_1 == id) {
+                        stock[k] = i;
+                        stock[k + 1] = j;
+                        k = k + 2;
+                    }
                 }
-                else if (plateau[i][j].bateau_joueur_2_touche && plateau[i][j].id_bateau_joueur_2 == id){
-                    stock[k] = i;
-                    stock [k+1] = j;
-                    k=k+2;
+                else {
+                    if (!plateau[i][j].bateau_joueur_2_touche && plateau[i][j].id_bateau_joueur_2 == id) {
+                        estcoule = false;
+                    } else if (plateau[i][j].bateau_joueur_2_touche && plateau[i][j].id_bateau_joueur_2 == id) {
+                        stock[k] = i;
+                        stock[k + 1] = j;
+                        k = k + 2;
+                    }
                 }
             }
         }
-        if (cpt != 0){
-            System.out.println("Vous n'avez pas coule le bateau adverse.");
-            System.out.println();
-        }
-        else{
-            for (int i = 0; i<=k; i=i+2){
-                plateau[stock[i]][stock[i+1]].bateau_joueur_2_coule = true;
-                //Rajouter actualisation class joueur nb de bato
+        if (estcoule && J.nom == "Ordinateur") {
+            for (int i = 0; i <= k; i = i + 2) {
+                plateau[stock[i]][stock[i + 1]].bateau_joueur_1_coule = true;
+                J.nbShip --;
+                tir = 3; //informe la machine
             }
-            System.out.println("Felicitation, vous avez coule le bateau adverse !");
+        }
+        else if (estcoule && J.nom != "Ordinateur"){
+            for (int j = 0; j <= k; j = j + 2) {
+                plateau[stock[j]][stock[j + 1]].bateau_joueur_2_coule = true;
+                J.nbShip --;
+            }
+            System.out.println("Felicitation, vous avez coule le bateau adverse !"); //informe le joueur
             System.out.println();
         }
-    } //actualise plateau et informe joueur
+
+        return tir; //informe la machine
+    }
+    //actualise plateau et informe joueur
     //fonciton estCoule diff pour ordi dans la modif des booleens
 
     private static boolean placer_bateau_Ordi(Position[][] plateau, int taille, int[] coordonnees, boolean horizontal, int id){
@@ -580,32 +622,32 @@ public class Main {
 
     private static void Jeu(int hauteur, int largeur){
         Position[][] plateau = new Position[hauteur][largeur];
-        boolean vainqueur=false;
-        for (int i=0;i<hauteur;i++) {
-            for (int j=0;j<largeur;j++){
-                plateau[i][j]=new Position(false,false,false,false,false,false,false,false,0,0);
+        boolean vainqueur = false;
+        for (int i = 0; i < hauteur; i++) {
+            for (int j = 0; j < largeur; j++) {
+                plateau[i][j] = new Position(false, false, false, false, false, false, false, false, 0, 0);
             }
         }
         System.out.println("Veuillez saisir votre nom :");
         Scanner sc = new Scanner(System.in);
         String name1 = sc.nextLine();
         List<Bateau> bateaux1 = new ArrayList<Bateau>();
-        for (int i=2;i<=2;i++ ){
+        for (int i = 2; i <= 2; i++) {
             AfficherPlateauJ1(plateau);
             System.out.println();
-            bateaux1.add(placement(plateau,i,i+98,name1));
+            bateaux1.add(placement(plateau, i, i + 98, name1));
         }
         AfficherPlateauJ1(plateau);
         System.out.println();
-        Player J1=new Player(name1,bateaux1,0,5);
+        Player J1 = new Player(name1, bateaux1, 0, 5);
 
         List<Bateau> bateaux2 = new ArrayList<Bateau>();
-        for (int i=2;i<=6;i++ ){
-            bateaux2.add(placement2(plateau,i,i+198,name1));
+        for (int i = 2; i <= 6; i++) {
+            bateaux2.add(placement2(plateau, i, i + 198, name1));
         }
 
 
-        Player J2=new Player("Ordinateur",bateaux2,0,5);
+        Player J2 = new Player("Ordinateur", bateaux2, 0, 5);
 
         boolean tour1;
         boolean tour2;

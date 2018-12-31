@@ -9,12 +9,14 @@ public class Player {
     private int nbTour;
     public int nbShip;
 
-    public Player(String player, List<Bateau> ships, int nbTour, int nbShip) {
+
+    public Player(String nom, List<Bateau> ships, int nbTour, int nbShip) {
         this.nom = nom;
         Ships = ships;
         this.nbTour = nbTour;
         this.nbShip = nbShip;
     }
+
 
     public String getPlayer() {
         return nom;
@@ -47,4 +49,6 @@ public class Player {
     public void setNbShip(int nbShip) {
         this.nbShip = nbShip;
     }
+
+
 }

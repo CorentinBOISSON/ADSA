@@ -381,10 +381,20 @@ public class Main {
         for (int i=2;i<=6;i++ ){
             bateaux2.add(placement2(plateau,i,i+198,name1));
         }
+
+
         Player J2=new Player("Ordinateur",bateaux2,0,5);
 
         boolean tour1;
         boolean tour2;
+
+        boolean randoom=true;
+        int [] coordonnees=new int[2];
+        int[][]haut=new int[5][2];
+        int[][]bas=new int[5][2];
+        int[][]droite=new int[5][2];
+        int[][]gauche=new int[5][2];
+        Memory memory= new Memory(true,coordonnees,haut,bas,droite,gauche);
 
        while (J1.nbShip!=0 || J2.nbShip!=0) {
 
@@ -398,7 +408,7 @@ public class Main {
            tour2=true;
 
            while (tour2){
-               tour2=TirJ1(plateau, J2);
+               tour2=TirOrdi(plateau, J2, memory);
            }
 
            AfficherPlateauJ1(plateau);

@@ -7,7 +7,7 @@ public class Player {
     private String nom;
     private List<Bateau> Ships;
     private int nbTour;
-    private int nbShip;
+    public int nbShip;
 
     public Player(String player, List<Bateau> ships, int nbTour, int nbShip) {
         this.nom = nom;

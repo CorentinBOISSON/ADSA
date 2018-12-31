@@ -390,21 +390,29 @@ public class Main {
 
            tour1=true;
 
-           while (tour1==true){
+           while (tour1){
                AfficherPlateauAttaqueJ1(plateau);
                tour1=TirJ1(plateau, J1);
            }
 
            tour2=true;
 
-           while (tour2==true){
+           while (tour2){
                tour2=TirJ1(plateau, J2);
            }
 
            AfficherPlateauJ1(plateau);
        }
-        //penser fonction ordre daffichage, apres chaque tir ? quand joueur le veux ?
-        //fonction estCoulee penser a modif attribut nbBato et List<Bato> du joueur
+
+       if (J1.nbShip!=0)
+       {
+           System.out.println("L'ordinateur a gagné, retenter votre chance !");
+       }
+
+       else{
+           System.out.println("Bravo ! Vous avez gagné :D ");
+       }
+
     }
 
     private static int readInt(Scanner scanner, String prompt, String promptOnError) {

@@ -7,7 +7,6 @@ import java.util.Scanner;
 public class Main {
 
     private static boolean TirJ1 (Position [][] plateau, Player J1) {
-        //il va falloir faire 2 fonctions tir pour les deux joueurs..
         boolean touche =false;
         System.out.println("C'est à votre tour de tirer.");
         int[] coordonnees = EntrerCoordonnes();
@@ -155,7 +154,7 @@ public class Main {
         boolean effectue =false;
         boolean place =true;
         if (coordonnees[0]>=0 && coordonnees[0]<hauteur && coordonnees[1]>=0 && coordonnees[1]<largeur) {
-            if (horizontal) {//hjkhgfghjk
+            if (horizontal) {
                 if (coordonnees[1]+taille <= largeur){
                     for (int i =coordonnees[1];i<coordonnees[1]+taille; i++ ){
                         if (plateau[coordonnees[0]][i].bateau_joueur_1){
@@ -399,62 +398,45 @@ public class Main {
     }
 
     private static boolean StrategieOrdi(Position[][] plateau, Player J2, Memory memory){
-
         int tire =3;
         boolean touche=false;
         int[]coordonnees=new int[2];
         int ligne =0;
         int colonne=0;
-
         if (memory.random) {
-
             while (tire == 3) {
                 ligne = (int) (Math.random() * plateau.length);
-
                 if (ligne % 2 == 0) {
                     colonne = (((int) (Math.random() * (plateau[0].length) / 2)) * 2) + 1;
                 } else {
                     colonne = ((int) (Math.random() * (plateau[0].length) / 2)) * 2;
                 }
-
-
                 coordonnees[0] = ligne;
                 coordonnees[1] = colonne;
-
                 tire = TirOrdi(plateau, J2, coordonnees);
-
                 if (tire == 2 || tire == 0) {
                     memory.random = true;
                 }
-
                 if (tire == 1) {
                     memory.random = false;
                 }
-
                 if (tire == 1 || tire == 2) {
                     memory.impact = coordonnees;
                     memory.shootsB=memory.shootsH=memory.shootsD=memory.shootsG=1;
                 }
-
             }
         }
-
         else {
             while (tire == 3) {
-
-
                 if (memory.haut) {
                     coordonnees[0] = memory.impact[0]-memory.shootsH;
                     coordonnees[1] = memory.impact[1];
-
                     if (coordonnees[0]>=0 && coordonnees[0]<plateau.length && coordonnees[1]>=0 && coordonnees[1]<plateau[0].length){
                         tire = TirOrdi(plateau, J2, coordonnees);
-
                     }
                     else{
                         memory.haut=false;
                     }
-
                     if (tire == 2) {
                         memory.random = true;
                         memory.haut=true;
@@ -463,35 +445,26 @@ public class Main {
                         memory.gauche=true;
                         memory.shootsB=memory.shootsH=memory.shootsD=memory.shootsG=0;
                     }
-
                     if (tire == 1) {
                         memory.shootsH++;
                     }
-
                     if (tire == 0) {
                         memory.haut=false;
                     }
-
                     if (tire == 3) {
                         memory.haut=false;
                     }
-
                 }
                 else {
-
                     if (memory.bas) {
-
                         coordonnees[0] = memory.impact[0]+memory.shootsB;
                         coordonnees[1] = memory.impact[1];
-
                         if (coordonnees[0]>=0 && coordonnees[0]<plateau.length && coordonnees[1]>=0 && coordonnees[1]<plateau[0].length){
                             tire = TirOrdi(plateau, J2, coordonnees);
-
                         }
                         else{
                             memory.bas=false;
                         }
-
                         if (tire == 2) {
                             memory.random = true;
                             memory.haut=true;
@@ -500,36 +473,26 @@ public class Main {
                             memory.gauche=true;
                             memory.shootsB=memory.shootsH=memory.shootsD=memory.shootsG=0;
                         }
-
                         if (tire == 1) {
                             memory.shootsB++;
                         }
-
                         if (tire == 0) {
                             memory.bas=false;
                         }
-
                         if (tire == 3) {
                             memory.bas=false;
                         }
-
-
                     }
                     else {
-
                         if (memory.droite) {
-
                             coordonnees[0] = memory.impact[0];
                             coordonnees[1] = memory.impact[1]+memory.shootsD;
-
                             if (coordonnees[0]>=0 && coordonnees[0]<plateau.length && coordonnees[1]>=0 && coordonnees[1]<plateau[0].length){
                                 tire = TirOrdi(plateau, J2, coordonnees);
-
                             }
                             else{
                                 memory.droite=false;
                             }
-
                             if (tire == 2) {
                                 memory.random = true;
                                 memory.haut=true;
@@ -538,36 +501,26 @@ public class Main {
                                 memory.gauche=true;
                                 memory.shootsB=memory.shootsH=memory.shootsD=memory.shootsG=0;
                             }
-
                             if (tire == 1) {
                                 memory.shootsD++;
                             }
-
                             if (tire == 0) {
                                 memory.droite=false;
                             }
-
                             if (tire == 3) {
                                 memory.droite=false;
                             }
-
-
                         }
                         else {
-
                             if (memory.gauche) {
-
                                 coordonnees[0] = memory.impact[0];
                                 coordonnees[1] = memory.impact[1]-memory.shootsG;
-
                                 if (coordonnees[0]>=0 && coordonnees[0]<plateau.length && coordonnees[1]>=0 && coordonnees[1]<plateau[0].length){
                                     tire = TirOrdi(plateau, J2, coordonnees);
-
                                 }
                                 else{
                                     memory.gauche=false;
                                 }
-
                                 if (tire == 2) {
                                     memory.random = true;
                                     memory.haut=true;
@@ -576,20 +529,15 @@ public class Main {
                                     memory.gauche=true;
                                     memory.shootsB=memory.shootsH=memory.shootsD=memory.shootsG=0;
                                 }
-
                                 if (tire == 1) {
                                     memory.shootsG++;
                                 }
-
                                 if (tire == 0) {
                                     memory.gauche=false;
                                 }
-
                                 if (tire == 3) {
                                     memory.gauche=false;
                                 }
-
-
                             }
                             else {
                                 memory.random = true;
@@ -598,27 +546,17 @@ public class Main {
                                 memory.droite=true;
                                 memory.gauche=true;
                                 memory.shootsB=memory.shootsH=memory.shootsD=memory.shootsG=0;
-
                             }
-
                         }
-
                     }
-
-
                 }
-
-
             }
         }
-
         if (tire == 1 || tire == 2) {
             touche = true;
         }
-
         return(touche);
     }
-
 
     private static void Jeu(int hauteur, int largeur){
         Position[][] plateau = new Position[hauteur][largeur];
@@ -632,7 +570,7 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         String name1 = sc.nextLine();
         List<Bateau> bateaux1 = new ArrayList<Bateau>();
-        for (int i = 2; i <= 2; i++) {
+        for (int i = 2; i <= 6; i++) {
             AfficherPlateauJ1(plateau);
             System.out.println();
             bateaux1.add(placement(plateau, i, i + 98, name1));
@@ -645,13 +583,9 @@ public class Main {
         for (int i = 2; i <= 6; i++) {
             bateaux2.add(placement2(plateau, i, i + 198, name1));
         }
-
-
         Player J2 = new Player("Ordinateur", bateaux2, 0, 5);
-
         boolean tour1;
         boolean tour2;
-
         boolean randoom=true;
         int [] coordonnees=new int[2];
         boolean haut=true;
@@ -659,40 +593,30 @@ public class Main {
         boolean droite=true;
         boolean gauche=true;
         Memory memory= new Memory(true,coordonnees,haut,bas,droite,gauche,0,0,0,0);
-
        while (J1.nbShip!=0 || J2.nbShip!=0) {
-
            tour1=true;
-
            while (tour1){
+               AfficherPlateauOrdi (plateau);
                AfficherPlateauAttaqueJ1(plateau);
                tour1=TirJ1(plateau, J1);
            }
-
            tour2=true;
-
            while (tour2){
                tour2=StrategieOrdi(plateau, J2, memory);
            }
-
            AfficherPlateauJ1(plateau);
        }
-
        if (J2.nbShip==0)
        {
            System.out.println("L'ordinateur a gagné, retenter votre chance !");
        }
-
        else{
            System.out.println("Bravo ! Vous avez gagné :D ");
        }
-
     }
 
     private static int readInt(Scanner scanner, String prompt, String promptOnError) {
-
         System.out.println(prompt);
-        //!scanner.hasNextInt()
         while ( !scanner.hasNextInt()) {
             System.out.print(promptOnError);
             scanner.nextLine(); // vidage saisie incorrect
@@ -702,11 +626,6 @@ public class Main {
 
     public static void main(String[] args) {
         Jeu(10,10);
-
-
-
-
-
     }
 }
 

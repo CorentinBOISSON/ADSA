@@ -28,3 +28,6 @@ For instance, and as long as one rule doesn’t interfere with the other (100 bo
 -	Number of boats
 -	Ships’ length
 -	Turn limit (the player has to destroy all of the boats in a limited amount of turns)
+
+
+Demonstration video link : https://www.youtube.com/watch?v=zpwjzA6mJtM&feature=youtu.be
